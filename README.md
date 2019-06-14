@@ -1,0 +1,1 @@
+# egzamin_kurde

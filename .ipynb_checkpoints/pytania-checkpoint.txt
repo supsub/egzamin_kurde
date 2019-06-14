@@ -1,0 +1,268 @@
+1.Cechy Architektury SOA:
+●zestandaryzowana​​funkcja​​interfejsu,●loosely​​coupled,●niezależne​​od​​platformy,●composable,●discoverable,●autonomiczność,​​rozszerzalność,​​interoperacyjność​​itd.
+2.Zasady architektury SOA:
+●Biznes​​steruje​​usługami,​​usługi​​sterują​​technologią,●Musi​​być​​“business​​agility”​​(szybka​​adaptacja​​na​​zmiany)●Procesy​​biznesowe​​tłumaczymy​​na​​logikę​​biznesową​​~~>​​definiujemy​​usługi związane​​z​​logiką​​~~>​​oddzielamy​​logikę​​biznesową​​od​​implementacji
+3.Jakie znasz usługi SOA?
+zestaw luźno​​połączonych​​komponentów,które​​ze​​sobą​​współpracują​​za​​pomocą​​różnych​​technologii,​​przestrzegając​​pewnych otwartych​​standardów​​(jak​​XML,​​SOAP)
+4.Usługi​​bezstanowe
+​​-​​​usługa​​nie​​utrzymuje​​żadnych​​informacji​​dotyczących​​stanu,konsument​​musi​​je​​wszystkie​​dostarczyć,​​dzięki​​temu​​można​​łatwo​​się​​skalować,implementować​​i​​zgeneralizować,​​ale​​nie​​mamy​​mechanizmu​​“sesji”
+5.Usługi​​stanowe
+​​​-​​kontekst​​zależy​​od​​konsumenta,​​można​​wprowadzić​​sesyjność,ale​​gorzej​​się​​skaluje
+6.Podział​​usług:
+●aplikacyjne​​​-​​specyficzne​​dla​​technologii​​funkcjonalności​​np.​​load​​balancing,​​usługi notyfikacji●biznesowe​​​-​​logika​​biznesowa,​​np.​​usługa​​rezerwacji●pośrednie​​​-​​bezstanowe,​​łączą​​koncepcje​​z​​architekturą​​np.​​konwersja​​danych,fasada●process​​centric​​​-​​stanowe,​​enkapsulują​​proces​​biznesowy,​​orkiestracja​​usług biznesowych●public​​enterprise​​​-​​na​​potrzeby​​B2B,​​eksportują​​logikę​​biznesową​​do​​innych​​firm
+7.Z czego składa się aplikacja SOA
+​​-​​​aplikacja​​składa​​się​​z​​usług(services)​​i​​ich​​konsumentów,​​oczywiście​​wszystko​​loosely coupled,​​reużywalne,​​business-driven​​itd.
+8.SOA​​Manifesto
+●Business​​value​​​over​​technical​​strategy●Strategic​​goals​​​over​​project-specific​​benefits●Intrinsic​​interoperability​​​over​​custom​​integration●Shared​​services​​​over​​specific-purpose​​implementations●Flexibility​​​over​​optimization●Evolutionary​​refinement​​​over​​pursuit​​of​​initial​​perfection
+9.Co to jest Business​​process​​management​​(BPM)
+Zarządzanie​​operacjami​​skupione​​na optymalizacji​​procesów​​biznesowych
+10.Model​​warstwowy
+●Fundamental​​SOA​​​-​​łatwa​​implementacja,​​dobre​​na​​start,​​ma​​tylko​​usługi​​aplikacyjnei​​biznesowe,​​można​​wprowadzić​​różny​​frontend,​​kontrola​​nad​​procesem​​biznesowym poprzez​​frontend●Networked​​SOA​​-​​​dochodzi​​usługa​​pośrednia​​między​​frontami​​a​​usługami,​​front​​staje się​​mniej​​skomplikowany,​​ale​​dalej​​ma​​kontrole​​w​​biznesie●Process​​enabled​​SOA​​-​​​dochodzi​​usługa​​process​​centric​​między​​pośrednią​​a​​front,jesteśmy​​zwinniejsi!​​​Networked​​SOA​​+​​BPM
+11.Orkiestracja​​
+​​​mamy​​jeden​​serwis​​(composite​​service)​​pomiędzy​​pozostałymi,​​który koordynuje​​integrację​​pozostałych
+12.Choreografia​​​-
+​​zdecentralizowane​​podejście,​​serwisy​​wymieniają​​się​​wiadomościami
+13.Podsumowanie architektury SOA
+​:●SOA​​umożliwia​​dynamiczną​​kolaborację​​pomiędzy​​luźno​​powiązanymi​​(loosecoupling)​​komponentami​​wielokrotnego​​użytku​​z​​wykorzystaniem​​otwartych standardów​​internetowych●SOA​​jest​​związane​​zarówno​​z​​biznesem​​jak​​i​​z​​technologią​​i​​ma​​umożliwić​​redukcję kosztów​​wytwarzania/utrzymania/zmian​​w​​oprogramowaniu​​oraz​​zwiększenie szybkości​​wytwarzania●SOA​​wywodzi​​się​​z​​technik​​programistycznych​​takich​​jak:​​distributed​​object computing,​​component-based​​software​​development,​​enterprise​​application integration
+14.Java​​Enterprise​​Edition​​(JEE)
+●Platforma​​oparta​​o​​technologie​​Java●Zestaw​​różnych​​interfejsów​​programistycznych●Wielowarstwowa​​architektura​​komponentowa​​-​​​kliencka​,​​​serwerowa​,​​​biznesowa​,EIS​​​(​Enterprise​​Information​​System​)/​​danych,​​można​​rozdzielić​​logikę​​biznesową od​​standardowych(generycznych)​​usług​​dla​​platformy●Serwer​​Aplikacji●Ma​​za​​zadanie​​pomóc​​robić​​korpo​​apki​​szybciej​​i​​lepiej
+15.Jakie obszary pokrywa API JEE?
+●Interfejs​​użytkownika​​(JSP,​​JSF)●Logika​​Biznesowa​​(EJB)●Dostęp​​do​​danych​​(JDBC,​​JPA)●Transakcje​​(JTA)●Bezpieczeństwo​​(JAAS)●XML​​i​​usługi​​sieciowe​​(JAX-WS,​​JAX-RS)●Poczta​​elektroniczna​​(JavaMail)
+16.Co to jest Kontener​​JEE i jakie są jego główne cechy?
+​​-​​​interfejs​​pomiędzy​​platformą,​​a​​komponentem,​​główne​​cechy:●składowanie​​i​​zarządzanie​​komponentami,●autoryzacja​​dostępu​​do​​komponentów,●realizacja​​transakcji​​dla​​metod,●dostęp​​do​​zasobów​​komponentów​​poprzez​​​JNDI​​​(Java​​Naming​​and​​DirectoryInterface)●wsparcie​​dla​​komunikacji​​między​​komponentami
+17.W jaki sposób aplikacje​​są​​publikowane?
+​​Jako​​pliki​​np.​​​JAR​​​(Java​​Archive),​​​WAR​​​(WebArchive),​​​EAR(Enterprise​​Archive),​​WAR​​i​​EAR​​są​​w​​standardzie​​JAR.
+18.Co to jest Java​​Naming​​and​​Directory​​Interface​​(JNDI)​​​?
+​​dostarcza​​usług​​i​​operacji związanych​​z​​katalogowaniem,​​poprzez​​JNDI​​można​​odczytać​​i​​zapisać​​dowolny​​obiekt​​Javy
+19.Co to jest Enterprise​​Java​​Bean​​(EJB)​​?
+​​​komponent​​w​​Javie​​EE,​​enkapsuluje​​logikę biznesową​​w​​kontenerze,​​pomagają​​przy​​potrzebie​​skalowalności,​​transakcyjności,współdzieleniu​​logiki​​przez​​różnych​​klientów.​​
+20.Na co dzielimy EJB?
+●Session​​Beans​​​-​​wykonują​​zadania​​dla​​klienta,​​mogą​​implementować​​web​​service,nie​​zapewniają​​persystencji●Message-driven​​beans​​​-​​działają​​jak​​słuchacze​​poszczególnych​​typów​​wiadomości(np.​​JMS​​Api),​​pozwala​​na​​asynchroniczne​​przetwarzanie​​komunikatów,
+21.Na co dzielimy Session Beans?
+●stateless beans●stateful beans●singleton
+22.Co to Java​​Bean?
+​​​normalna​​javowa​​klasa,​​która​​ma​​prywatne​​atrybuty,​​publiczny bezargumentowy​​konstruktor,​​gettery/settery​​oraz​​implementuje​​Serializable.​​Dużo​​bibliotek polega​​na​​tym​​standardzie.
+23.Co to Dependency​​Injection​​?
+​​​proces​​dostarczania​​zewnętrznych​​zależności​​dokomponentów​​oprogramowania.​​Usuwa​​bezpośrednie​​zależności​​pomiędzy​​komponentami na​​rzecz​​architektury​​plug-in.Pozwala​​zachować​​czystość​​architektoniczną​​kodu.​​W​​najprostszej​​formie sprowadza​​się​​do​​tego,​​że​​nasza​​klasa​​zamiast​​wyszukiwać​​sobie​​lub​​samodzielnie​​tworzyć jakąś​​zależność​​(np.​​połączenie​​do​​bazy),​​to​​możemy​​jej​​to​​przekazać​​jako​​argument​​do konstruktora,​​najlepiej​​jako​​jakiś​​interfejs,​​który​​możemy​​łatwo​​podmienić,​​nie​​martwiąc​​się​​o konieczność​​zmiany​​kodu​​w​​tej​​klasie.Łatwiej​​też​​testować,​​bo​​pisząc​​testy​​możemy​​użyć​​tej​​samej​​klasy,​​po​​prostu zamiast​​np.​​połączenia​​do​​wyrzutni​​rakiet​​przekazujemy​​coś​​co​​zwraca​​wartość​​bez​​efektu ubocznego.
+24.Co to jest Context​​and​​Dependency​​Injection​​(CDI)​​?
+​​​redefiniuje​​koncept​​Bean​​w​​Javie.​​Bean to​​komponent​​Javy​​EE​​jeśli​​cykl​​życia​​​​jego​​instancji​​może​​być​​zarządzany​​przez​​kontener zgodnie​​z​​cyklem​​życia​​modelu​​zdefiniowanego​​w​​specyfikacji​​CDI.Żeby​​utworzyć​​bean​​zarządzany​​przez​​CDI​​należy​​zdefiniować​​go​​jako​​​managed bean​​​przez​​aplikację​​typu​​​JavaServer​​Faces​​(JSF)​​​lub​​spełniać​​podane​​kryteria:●Jest​​konkretną​​klasą​​(lub​​posiada​​adnotację​​@Decorator)●Posiada​​konstruktor​​z​​adnotacją​​@Inject​​lub​​konstruktor​​bezparametrowy
+25.Zakres​​życia​​Beanów​​​
+​​możemy​​zdefiniować​​cykl​​życia​​beanów​​(będą​​tworzone,kiedy​​są​​potrzebne​​i​​automatycznie​​niszczone​​później)​​za​​pomocą​​adnotacji,​​takich​​jak:@RequestScoped​​​-​​pojedynczy​​request​​HTTP@SessionScoped​​​-​​interakcja​​z​​użytkownikiem​​przez​​wiele​​requestów​​HTTP@ApplicationScoped​​​-​​współdzielony​​stan​​przez​​wszystkie​​interakcje​​użytkownika​​z aplikacją Aby​​móc​​wykorzystać​​beany​​w​​technologii​​​JSP​​​lub​​​JSF​​​należy​​nadać​​im​​nazwy,​​które​​będą wykorzystywane​​przez​​Expression​​Language​​przy​​użyciu​​adnotacji​​​@Named.
+26.Co to Web​​Service​​Description​​Language​​(WSDL)​​?
+​​​dokument​​XML,​​który​​opisuje​​usługę sieciową:​​opisuje​​lokalizację​​usługi​​i​​informacje​​o​​operacjach​​przez​​nią​​udostępnianych.Specyfikujemy​​następujące​​elementy:●<types>​​​-​​​​definiuje​​typy​​danych​​wykorzystywane​​przez​​WS​​(wykorzystuje​​składnię XML​​Schema)●<message>​​​-​​definiuje​​dane​​wykorzystywane​​przez​​operację​​(analogia​​dofunkcji/metody)●<portType>​​​-​​operacje​​wykonywane​​przez​​webservice​​i​​komunikaty,​​które​​są​​z​​nimi związane​​(analogia​​do​​bibliotek​​funkcji​​lub​​klasy​​w​​językach​​programowania)●<binding>​​​-​​definiuje​​format​​wiadomości​​i​​szczegóły​​protokołu​​dla​​każdego​​portu Porty​​-​​​​​definiują​​operacje,​​które​​są​​udostępniane​​przez​​WS​​i​​komunikaty​​(message),​​które są​​z​​tym​​związane.​​Typy​​operacji:●one-way​​​-​​​​operacja​​może​​otrzymać​​komunikat​​ale​​nie​​zwróci​​rezultatu ●request-response​​​-​​​​operacja​​może​​otrzymać​​request​​i​​zwrócić​​response j.w.​​ale​​w​​operation​​może​​być​​jeszcze:<output​​message​​=​​“response”>●solicit-response​​​-​​operacja​​może​​wysłać​​request​​i​​czekać​​na​​response●notification​​​-​​​​może​​wysłać​​wiadomość​​ale​​nie​​będzie​​czekać​​na​​response
+27.Co robią dowiązania​​(binding)​​?
+​​​definiuje​​format​​komunikatu​​i​​szczegóły​​protokołu webservice,​​ma​​dwa​​atrybuty​​(​name​​​i​​​type​),​​nazwa​​może​​być​​dowolna,​​a​​typ​​wskazuje​​naport​​dla​​dowiązania.soap​:​binding​​​posiada​​dwa​​atrybuty​​(​style​​​i​​​transport​),​​style​​może​​mieć​​wartość​​​rpclub​​​document​​​a​​transport​​definiuje​​protokół​​dla​​SOAP.Element​​​<operation>​​​definiuje​​każdą​​operację​​udostępnioną​​przez​​port.​​Dla​​każdej operacji​​musi​​być​​zdefiniowana​​korespondująca​​akcja​​SOAP.​​Dodatkowo​​należy​​określić​​jak kodowane​​jest​​wejście/wyjście,​​​encoded​​​lub​​​literal
+28.Co to jest :Universal​​Description,​​Discovery​​and​​Integration​​(UDDI)​​​?
+Katalog​​doprzechowywania​​informacji​​o​​usługach​​sieciowych,​​opisów​​webservice​​opisanych​​poprzezWSDL,​​wykorzystuje​​do​​komunikacji​​protokół​​SOAP,​​obsługa​​wbudowana​​w​​.NET​​Java​​EE.
+29. Co to jest komunikat SOAP, jakie elementy zawiera?
+SOAP​​​-​​komunikat​​​​SOAP​​to​​dokument​​XML,​​zawierający​​elementy:●koperta
+●nagłówek​​●body●element​​fault
+30. Co to jest koperta w komunikacie SOAP?
+identyfikuje​​XML​​jako​​komunikat​​SOAP
+31. Co to jest nagłówek w komunikacie SOAP?
+zawiera​​dodatkowe​​informacje,​​np.​​dotyczące​​autentykacji,​​jeśliwystępuje​​to​​musi​​jako​​pierwszy,​​atrybut​​​mustUnderstand​​-​​​określa​​czynagłówek​​jest​​obowiązkowy​​do​​przetworzenia,​​atrybut​​​encodingStyle​​​-wykorzystywany​​do​​zdefiniowania​​danych​​używanych​​przez​​dokument,
+32. Co to jest body w komunikacie SOAP?
+obowiązkowe,​​zawiera​​informacje​​o​​wywołaniu​​i​​zwracanymrezultacie,
+33. Co to jest element fault w komunikacie SOAP?
+opcjonalnie,​​jeżeli​​występuje​​to​​musi​​w​​ramach​​body,informacje​​o​​błędach​​i​​statusach,​​może​​pojawić​​się​​tylko​​raz
+34. Wymień reguły SOAP
+●komunikat​​musi​​być​​zakodowany​​w​​XML,●musi​​używać​​namespace​​definiowanego​​przez​​kopertę,●nie​​może​​zawierać​​referencji​​DTD,●Nie​​może​​zawierać​​informacji​​o​​sposobie​​przetwarzania​​XML
+35. Wymień style SOAP
+●RPC/encoded​​-​​​prosty​​WSDL,​​nazwa​​operacji​​znajduje​​się​​w​​xml​​(można​​łatwoznaleźć​​implementacje​​w​​kodzie),​​niezgodny​​ze​​standardem​​WSI-I●RPC/literal​​​​-​​​prawie​​to​​samo,​​ale​​usunięto​​informacje​​o​​typie​​(zgodność​​zestandardem​​WSI-I),​​ale​​trudniej​​zwalidować​​poprawność​​komunikatu,●Document/encoded​​-​​​nieużywany,​​niezgodny​​z​​WSI-I,●Document/literal​​​(default)​​-​​nie​​mamy​​informacji​​o​​typie,​​możemy​​walidowaćkomunikaty​​standardowym​​walidatorem​​XML,​​ale​​WSDL​​jest​​obszerniejszy,​​a​​WSI-Ipozwala​​tylko​​na​​jednego​​potomka​​w​​soap:body,​​nie​​nadaje​​się​​kiedy​​mamyprzeciążone​​operacje
+36.Co to jest REST?
+REST​​-​​​wzorzec​​oprogramowania​​sieciowego,​​którego​​główną​​jednostką​​jest​​zasób.W​​przeciwieństwie​​do​​typowych​​usług​​sieciowych​​opartych​​o​​WSDL/SOAP/UDDI​​są​​lekkie​​w implementacji​​i​​wymagają​​jedynie​​obsługi​​protokołu​​HTTP.​​Standardem​​dla​​javy​​jest JAX-RS
+37.Jakie adnotacje w REST?
+●@GET,​​@POST,​​@DELETE​​itd.​​-​​określa​​jakie​​zapytanie​​wykonujemy,●@Path​​-​​ścieżka​​do​​zasobu●@Produces​​-​​jaka​​będzie​​reprezentacja​​zasobu●@Consumes​​-​​jakie​​reprezentacje​​możemy​​przyjąć
+38.Co to jest idempotentność
+wielokrotne​​stosowanie​​tej​​samej​​operacji​​daje​​ten​​sam​​wynik​​coza​​pierwszym​​razem.
+39. Co to jest bezpieczność?
+Metoda jest bezpieczna jeśli nie modyfikuje zasobu
+40.Jakie są cechy stateless beans?
+Nie​​utrzymuje​​informacji​​o​​stanie​​podczas​​konwersacji​​z klientem,​​można​​użyć​​kiedy​​np.​​bean​​ma​​wykonać​​ogólne​​działanie​​dla wszystkich​​klientów​​takie​​jak​​rozesłanie​​e​​maila​​potwierdzającego zamówienie.
+41.Jakie są cechy stateful beans?
+jego​​atrybuty​​reprezentują​​stan​​unikalnego​​dla​​klienta beana,​​które​​nie​​są​​współdzielone​​z​​innymi​​użytkownikami​​(czas​​życia​​beana=​​czas​​sesji​​z​​klientem),​​można​​użyć​​kiedy​​np.​​bean​​odpowiada​​za​​workflow nnych​​beanów,​​potrzeba​​przechowywać​​informacje​​między​​wywołaniami metod
+42.Jakie są cechy singleton beans?
+instancjonalizowany​​raz​​dla​​aplikacji,​​współdzielony​​przezklientów
+43.Które metody RESTOWE (GET,POST,PUT,DELETE) są idempotentne?
+Wszystkie prócz POSTA.
+44.Które metody RESTOWE (GET,POST,PUT,DELETE) są bezpieczne?
+Tylko GET.
+45.Co to jest model dojrzałości Richardsona?
+Jest to model opisujący założenia usług RESTful
+46. Opisz poziom 0 modelu dojrzałości Richardsona
+Poziom​​0​​(The​​Swamp​​of​​POX)​:​​mówi​​o​​tym,​​że​​REST​​w​​zasadzie​​korzysta​​zgotowych​​rozwiązań​​czyli​​protokołu​​http,​​tylko​​jeden​​endpoint​​m​​jedna​​metoda​​HTTP(​​zwyklePOST)
+47.Opisz poziom 1 modelu dojrzałości Richardsona
+Poziom​​1​​(Resources)​:​​wprowadza​​definicje​​zasobu​​oraz​​jego​​hierarchi
+48.Opisz poziom 1 modelu dojrzałości Richardsona
+Poziom​​2​​(HTTP​​Verbs)​:​​w​​poprzednich​​poziomach​​zapytania​​mogły​​korzystać wyłącznie​​z​​POST,​​poziom​​ten​​wprowadza​​inne​​czasowniki​​HTTP​​np.​​GET,​​PUT​​orazwykorzystuje​​w​​pełną​​pulę​​kodów​​odpowiedzi​​HTTP(w​​poprzednich​​warstwach​​dostępna​​jesttylko​​200)
+49.Opisz poziom 1 modelu dojrzałości Richardsona
+Poziom​​3​​(Hypermedia​​Controls)​:​​wprowadza​​HATEOAS,​​czyli​​mechanizm umożliwiający​​nawigację​​przez​​zasoby​​bez​​wiedzy​​o​​konkretnych​​adresach​​url.​​Klient​​znająca adres​​korzenia​​wykonując​​zapytanie​​dostaje​​listę​​zasobów,​​które​​zawierają​​w​​sobie​​adres​​dosiebie​​pozwalający​​wykonać​​zapytanie​​na​​konkretnym​​zasobie
+50. Co to jest Serwlet?
+Serwlet​​-​​​kawałek​​kodu​​w​​Javie​​po​​stronie​​serwera​​HTTP,​​który​​rozszerza​​jegomożliwości.​​Działa​​w​​odpowiedzi​​na​​żądanie​​klienta,​​pełni​​rolę​​kontrolera​​w​​MVC,Służy​​do​​wyświetlania​​dynamicznych​​stron​​WWW,​​przetwarzania​​formularza,forwardingu,​​wyświetlania​​wyników​​zapytań​​do​​bazy​​danych.
+51. Jak wygląda komunikacja servletu z serwerem?
+●przedefiniowanie​​metod​​doGet,​​doPost,​​doPut,​​doDelete,●dane​​od​​klienta​​(przeglądarki)​​są​​w​​HttpServletRequest●dane​​do​​klienta​​symbolizuje​​HttpServletResponse
+52.Wymień ważne metody dla request servleta
+getParameter,​​getCookies,​​getSession,​​getReader,getInputStream
+53.Wymień ważne metody dla response servleta
+getWriter,​​getOutputStream
+54. Jak zaimplementować serwlet w Javie?
+Serwlet​​w​​Javie​​musi​​dziedziczyć​​po​​HttpServlet​​i​​obsługiwać​​jedną​​z​​metod:​​doGetlub​​doPost.​​Opcjonalnie​​można​​napisać​​​void​​init(config​)​​i​​​void​​destroy(​)​​wywoływane​​tylkoraz.
+55. Opisz cykl życia serwletu
+Cykl​​życia​​to:​​​init​​~~>​​doGet()/doPost()​​~~>​​destroy()Klient​​HTTP​​przekazuje​​żądanie​​do​​serwera​​HTTP,​​które​​kierowane​​jest​​do​​serweraaplikacji​​JEE,​​tam​​tworzony​​jest​​obiekt​​serwletu,​​wywoływane​​init​​i​​dalej.Może​​powstać​​kilka​​kopii​​tego​​samego​​serwletu​​(należy​​uważać​​na​​wielowątkowość).
+56. Opisz utrzymywanie stanu servletu
+●obiekty​​istnieją​​w​​pamięci​​kontenera,​​metody​​operują​​na​​referencjach,​​poodczytaniu​​referencji​​metodą​​getAttribute​​operujemy​​na​​prawdziwym(jedynym)​​obiekcie●Po​​odczytaniu​​atrybutu​​trzeba​​sprawdzić​​czy​​jest​​null,​​jeśli​​tak​​to​​tworzymynowy●Sesje​​działają​​standardowo​​na​​ciasteczkach,​​jest​​tam​​tylko​​id​​sesji,​​reszta​​wkontenerze.​​Jeśli​​przeglądarka​​nie​​obsługuje​​ciasteczek​​to​​należy​​użyćmetody​​encodeURL().●Różne​​serwlety​​mogą​​korzystać​​z​​jednej​​sesji
+57.Wymień serwletowe adnotacje
+Serwlet​​adnotacje:@​WebServlet​(​name​​​=​​“name”,urlPatterns​​​=​​{“\url}’,initParams​​​​​=​​{@InitParam(name="n1",​​value="v1")​​}●name​​​-​​<servlet-name>​​pod​​<servlet>​​w​​web.xml●urlPattern​​​-​​<url-pattern>​​pod​​​​<servlet-mapping>●initParams​​​-​​<init-param>​​pod​​​​<servlet>@ServletFilter@WebServletContextListener
+58. Co to jest JMS?
+Java​​Messaging​​Service​​(JMS)​​API​​-​​​standardowy​​zestaw​​interfejsów​​i​​modeli​​dotworzenia,​​czytania​​i​​przesyłania​​komunikatów
+59. Na czym oparta jest komunikacja w JMS?
+Komunikacja​​oparta​​jest​​na​​bezpośrednim​​przesyłaniu​​wiadomości.​​Klienci​​zamiastadresować​​wiadomość​​na​​konkretnego​​odbiorcę,​​oznaczają​​jedynie​​na​​jaki​​zasób​​(cel)​​mazostać​​ona​​dostarczona.
+60. Ilu niezależnych klientów może nasłuchiwać na jednym zasobie w JMS?
+Jeden lub więcej.
+61. Wymień cechy JMS
+●Niezawodność​​​(exactly​​once​​delivery)●Loose​​coupling​​​(niezależne​​od​​siebie​​kody​​programów)●Asynchroniczność
+62. Jakie interfejsy zawiera JMS?
+●Destination​​​(cel​​i/lub​​źródło​​wiadomości)●ConnectionFactory​​​(obiekt,​​który​​przechowuje​​konfigurację​​połączenia)●Connection​​​(daje​​dostęp​​do​​aktywnego​​połączenia,​​potrzebne​​do​​zrobienia​​sesji)●Session​​​(wątek,​​który​​odbiera/wysyła​​wiadomości)●Message​​​(przechowuje​​wiadomość)●MessageProducer​​​(wysyła​​wiadomość)●MessageConsumer​​​(odbiera​​wiadomość
+63. Wymień typy komunikatów JMS
+●Point​​to​​Point​​​-​​wysyłane​​przez​​kolejki​​do​​określonego​​odbiorcy●Publish​​subscribe​​​-​​1​​nadawca,​​wielu​​odbiorców,​​którzy​​subskrybują​​dany​​topic
+64.Wymień typy wiadomości w JMS
+●TextMessage​(String),
+●MapMessage​(Map[String,​​Any]),●BytesMessage(​binarna),●StreamMessage​(strumień​​prymitywów),●ObjectMessage​(serializowany​​obiekt),●Message​​​(sam​​nagłówek)
+65. Co to jest serwer aplikacji?
+Tworzy​​odpowiednie​​środowisko​​aplikacji,​​definiuje​​połączenia​​do​​kolejek​​i tematów
+66. Czy JPA jest zależne od EJB?
+Nie
+67. Jakie są podstawowe usługi JPA?
+●Entity​​Manage​r​​-​​usługi​​dla​​persystencji,​​zarządzanie​​transakcjami​​i​​cyklemżycia​​encji●ORM​​(Object-relational​​mapping)​​​-​​zapewnienie​​mapowania​​międzyobiektami​​javy,​​a​​tabelami​​bazy​​danych●JPQL​​(Java​​Persistence​​Query​​Language)​​​-​​pobieranie​​encji​​poprzezspecjalny​​język​​zapytań
+68. Jakie biblioteki implementują JPA?
+Hibernate i Toplink
+69. Co to jest Hibernate?
+Narzędzie,​​dzięki​​któremu​​możemy​​zapisywać​​obiekty​​Javy​​w​​relacyjnejbazie​​oraz​​odczytywać​​z​​nich​​dane.Jest​​czołowym​​rozwiązaniem​​dla​​ORM​​w​​Javie.​​Odnosi​​się​​bezpośrednio​​dozłożoności​​ORM,​​zapewniając​​możliwość​​mapowania​​danych​​z​​modelu​​obiektowego​​narelacyjny​​model​​danych​​i​​odpowiadający​​mu​​schemat​​bazodanowy.​​Klasa​​Javy​​odpowiadajednej​​tabeli.​​Obiekt​​Javy​​odpowiada​​jednemu​​rekordowi
+70. Wymień zalety Hibernate
+●mniej​​kodu,●bazuje​​na​​standardach,●connection​​pooling​​(stała​​liczba​​połączeń​​zamiast​​ciągle​​tworzyć​​nowe​​co​​jestkosztowne),●niezależność​​od​​bazy​​danych
+71. Wymień wady Hibernate
+●wymaga​​optymalizacji​​na​​poziomie​​bazy​​danych●dodatkowa​​warstwa
+72. Wymień podstawowe cechy Hibernate
+●wsparcie​​dla​​stylu​​programowania​​w​​Javie,●Obsługa​​asocjacji,​​kompozycji,​​dziedziczenia,​​polimorfizmu,​​kolekcji●Wysoka​​wydajność​​i​​skalowalność●Dual-layer​​cache,​​możliwość​​wykorzystania​​w​​klastrze,●Wiele​​sposobów​​wykonywania​​zapytań,●Open​​Source,​​wsparcie​​Red​​Hat
+73. Jak robimy dziedziczenie w Relacyjnych Bazach Danych (RDB)?
+Robimy​​tak,​​że​​tworzymy​​dwie​​tabele,​​które​​zawierają​​cechy wspólne(te​​dziedziczone)​​​​i​​specyficzne
+74.Co to jest POJO?
+POJO​​​(Plain​​Old​​Java​​Object)​​-​​normalny​​obiekt​​javowy,​​nie​​komponent​​EJB,zawierają​​tylko​​atrybuty,​​konstruktor​​bezparametrowy​​(opcjonalnie​​inne)​​oraz​​gettery/settery,nie​​mają​​nic​​wspólnego​​z​​persystencją​​więc​​można​​je​​łatwo​​modyfikować
+75. Co to znaczy że transakcje są ACID?
+Ich cechy to ACID​​​(​​atomicity,​​consistency,​​isolation,​​durability)
+76. Wymień cechy transakcji
+●cyklem​​życia​​zarządza​​kontener​​np.​​EJB●transakcje​​wykorzystują​​JTA​​​(Java​​Transaction​​API●posiadają​​domyślny​​start​​i​​koniec●aplikacje​​standalone​​działające​​poza​​kontenerem​​muszą​​same zarządzać​​transakcyjnością​​poprzez​​wywoływanie​​metod​​klasy EntityManager
+77. Czy musimy decydować o początku i końcu transakcji?
+Tak
+78.Jakie znasz atrybuty transakcji?
+●SUPPORTS ●NOT_SUPPORTED ● REQUIRED ●REQUIRES_NEW ●MANDATORY ●NEVER
+79. Za co odpowiada atrybut SUPPORTS w transakcjach?
+Jeśli​​wywołujący​​jest​​w​​transakcji,​​to​​metoda​​będziewywoływana​​w​​ramach​​tej​​samej​​transakcji,​​jeśli​​nie,​​to​​będzie​​tworzonanowa​​transakcja​​wykonywana​​poza​​kontekstem​​transakcyjnym
+80. Za co odpowiada atrybut NOT_SUPPORTED w transakcjach?
+Jeśli wywołujący jest w transakcji to jest ona zawieszona
+81. Za co odpowiada atrybut REQUIRED w transakcjach?
+Metoda musi być wywołana w ramach jakiejś transakcji, wartość domyślna
+82. Za co odpowiada atrybut REQUIRES_NEW w transakcjach?
+Metoda musi być wykonana w ramach nowej transakcji, zawiesza starą transakcje i kontynuuje jak skończy
+83. Za co odpowiada atrybut MANDATORY w transakcjach?
+Metoda musi być w ramach istniejącej transakcji, jeśli nie to rzuca wyjątek
+84. Za co odpowiada atrybut NEVER w transakcjach?
+Jeśli metoda jest wywołana w ramach istniejącej transakcji to rzucony jest wyjątek.
+85. Podaj przykład zadeklarowania atrybutu transakcji w kodzie
+@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+86. Opisz wzorzec Edge Komponent
+Rozdziela​​logikę​​usług​​od​​części technologicznej,​​każda​​klasa​​powinna​​mieć​​jedną​​odpowiedzialność,​​a​​każda​​metodazwiązana​​z​​tą​​klasą​​powinna​​być​​ściśle​​dopasowana​​do​​tej​​odpowiedzialności.
+87. Opisz wzorzec Agnostic Context
+Izolujemy​​logikę​​aplikacji,​​która​​nie​​jest​​specyficzna​​dla​​jednego zastosowania.​​Przydaje​​się,​​bo​​jeśli​​mamy​​aplikację,​​w​​której​​jest​​wymieszana specyficzna​​logika​​z​​dość​​ogólną,​​to​​tej​​drugiej​​nie​​możemy​​bezpośrednio​​użyć​​w innym​​programie​​tylko​​musimy​​np.​​duplikować​​kod
+88. Opisz wzorzec Domain Inventory
+Grupujemy serwisy w zarządzalne, specyficzne dla domeny "service inventory", każde może być niezależnie zarządzane. Jeśli mielibyśmy jedno wielkie, to zarządzanie tym mogłoby okazać się niemożliwe
+89. Opisz wzorzec Service Facade
+Dodajemy pośrednika pomiędzy "core" systemu, a logiką biznesową, zmniejsza to powiązania, bo w razie zmian często wystarczy zmodyfikować tylko fasadę zamiast nanosić zmiany na "core" systemu, który powinien być reusable.
+90. Opisz wzorzec Message Screening
+Każda wiadomość którą dostajemy jest najpierw sprawdzana pod kątem szkodliwych danych.
+91. Opisz wzorzec Multi-Channel Endpoint
+Tworzy usługę pośredniczącą, która obejmuje całą rozdrobnioną logikę i wystawia jeden zestandaryzowany kontrakt dla różnych kanałów dostępu.
+92. Opisz wzorzec Service Host
+Dotyczy środowiska, w którym uruchamiane są instancje usługi, mamy np. kontener gdzie udostępniamy usługę z umożliwieniem konfiguracji i przeprowadzaniem instalacji usług, nie musimy za każdym razem ręcznie powtarzać konfiguracji.
+93. Opisz wzorzec Active Service
+Gdy wysyłamy żadanie, czekamy "w sposób aktywny"(obserwator). Jeżeli nie otrzymamy odpowiedzi wykonujemy normalnie dalsze działania. Pasywnie to usługa może przekazać request gdzieś dalej i wisieć, czekając na odpowiedź.
+94. Opisz wzorzec Transactional Service
+Całe flow wiadomości robimy w jednej transakcji (albo przejdzie całość albo nic)
+95. Opisz wzorzec Contract Centralization
+Konsumenci danego serwisu zamiast odwoływać się do konkretnej funkcji/zasobów (duże uzależnienie od implementacji) są ograniczeniu do jakiegoś specjalnego, scentralizowanego kontraktu
+96. Opisz wzorzec Metadata Centralization
+Może się zdarzyć, że ktoś przez niedopatrzenie tworzy usługi, któ©e już istnieją, więc tworzymy się centralny punkt dostępowy z metadanymi, opisujące istniejące usługi (Service Registry)
+97. Opisz wzorzec przepływu pracy
+Wprowadzamy aplikację (workflow engine), która ma sobie radzić z niestałymi zmiennymi procesami oraz orkiestrować stabilną logikę.
+98. Wymień wzorce dotyczące wydajności
+●oddzielne​​wywołanie,●potoki​​równoległe,●usługi​​przekazania​​sieciowego,●instancja​​usługi,●wirtualny​​punkt​​końcowy
+99. Powiedz do jakiej klasy zalicza się wzorzec Service Worker i opisz go
+Klasa prezentacyjna. Łączy​​komponent​​Dispatcher​​z​​wzorcami​​FrontController​​i​​View​​Helper.​​Np.​​klient​​może​​mieć​​różne​​rodzaje​​kont​​w​​banku,kiedy​​się​​loguje,​​to​​zanim​​kontrola​​idzie​​w​​ręce​​modułu​​odpowiedzialnego​​zawidok,​​to​​najpierw​​działa​​logika​​biznesowa​​(np.​​sprawdzi​​w​​bazie​​jakiego rodzaju​​konto​​ma​​klient)
+100. Powiedz do jakiej klasy zalicza się wzorzec Dispatcher​​View i opisz go
+Klasa prezentacyjna.
+Łączy​​komponent​​Dispatcher​​z​​wzorcami​​Front​​Controller​​iView​​Helper,​​wstrzymując​​wiele​​zadań​​do​​czasu​​przetworzenia​​widoku.​​Kiedy przetwarzanie​​zadań​​jest​​na​​tyle​​proste,​​że​​​Service​​To​​Worker​​​jest​​na​​to​​zbytciężki,​​Dispatcher​​View​​pozwala​​umieścić​​odrobinę​​logiki​​biznesowej​​isterującej​​w​​widokach,​​działa​​to​​przeciwko​​luźnym​​powiązaniom​​i​​należyużywać​​tylko​​dla​​bardzo​​prostej​​logiki.
+101. Powiedz do jakiej klasy zalicza się wzorzec Composite​​View i opisz go
+Klasa prezentacyjna.
+Tworzy​​złożony​​widok​​z​​wielu​​komponentów​​składowych
+102. Powiedz do jakiej klasy zalicza się wzorzec View​​Helper i opisz go
+Klasa prezentacyjna.
+Zawiera​​logikę​​niezwiązaną​​z​​formułowaniem​​prezentacji​​w komponentach​​pomocniczych.​​Oddzielamy​​model​​i​​widok,​​np.​​jedna​​klasałączy​​się​​z​​bazą​​danych,​​a​​druga​​robi​​z​​tego​​tabelę​​html
+103. Powiedz do jakiej klasy zalicza się wzorzec Application​​Controller i opisz go
+Klasa prezentacyjna.
+Centralizacja​​zarządzania​​widokiem​​i​​akcjami aplikacji.​​Kiedy​​Front​​Controller​​służy​​jako​​punkt​​wejścia​​dla​​requestów,​​to Application​​Controller​​identyfikuje​​i​​odpala​​konkretne​​komendy
+104. Powiedz do jakiej klasy zalicza się wzorzec Context​​Object​​​ i opisz go
+Klasa prezentacyjna.
+Enkapsuluje​​stan​​niezależnie​​od​​protokołu​​żeby​​łatwo​​móc go​​wykorzystać​​w​​różnych​​warstwach​​aplikacji
+105. Powiedz do jakiej klasy zalicza się wzorzec Intercepting​​Filter​​​ i opisz go
+Klasa prezentacyjna.
+Przechwytuje​​podobne​​wiadomości​​i​​puszcza​​przez​​filter,zajmuje​​się​​przetwarzaniem​​żądania​​klienta​​po​​jego​​otrzymaniu​​i​​przywysyłaniu​​odpowiedzi
+106. Powiedz do jakiej klasy zalicza się wzorzec Front​​Controller i opisz go
+Klasa prezentacyjna.
+Zapewnia​​scentralizowany​​kontroler​​zarządzający​​obsługą żądań,​​służy​​do​​przechowywania​​wspólnej​​logiki​​procesowania​​różnych komend​​widoku,​​różni​​się​​od​​Intercepting​​Filter​​tym,​​że​​jego​​akcje​​zależą​​od requestu,​​a​​ten​​pierwszy​​modyfikuje​​request
+107. Powiedz do jakiej klasy zalicza się wzorzec Business​​Delegate i opisz go
+Klasa biznesowa.
+Ukrywa​​przed​​klientem​​złożoności​​komunikacji​​z elementami​​biznesowymi,​​zmniejsza​​powiązania​​pomiędzy​​warstwami(tierami)​​i​​wprowadza​​jeden​​punkt​​wejścia.​​Business​​Delegate​​używa​​​Service Locator’a​​​do​​znalezienia​​odpowiedniej​​usługi​​biznesowej.
+108. Powiedz do jakiej klasy zalicza się wzorzec Service​​Locator i opisz go
+Klasa biznesowa.
+Enkapsulacja​​mechanizmów​​do​​podglądania komponentów​​(zestandaryzowany​​sposób​​na​​lokalizację​​usług​​biznesowych),zastępstwo​​dla​​​JNDI
+109. Powiedz do jakiej klasy zalicza się wzorzec Session​​Façade i opisz go
+Klasa biznesowa.
+Ukrywa​​skomplikowane​​elementy​​systemów​​za ładniejszym​​interfejsem,​​nie​​udostępniamy​​bezpośrednio​​klientom​​usług warstw​​biznesowej
+110. Powiedz do jakiej klasy zalicza się wzorzec Application​​Service i opisz go
+Klasa biznesowa.
+Przeniesienie​​logiki​​biznesowej​​z​​warstwy​​prezentacji do​​osobnego​​obiektu,​​szczególnie​​wtedy​​gdy​​staje​​się​​zbyt​​skomplikowana(logika).​​Wprowadza​​dodatkową​​warstwę,​​są​​to​​np.​​obiekty​​EJB.
+111. Powiedz do jakiej klasy zalicza się wzorzec Business​​Object i opisz go
+Klasa biznesowa.
+W małych​​projektach​​warstwa​​biznesowa​​i​​prezentacji używa​​tego​​samego​​modelu​​obiektu.​​Business​​Object​​wprowadza​​dodatkową warstwę​​z​​własnym​​modelem​​obiektu,​​więc​​mamy​​to​​odseparowane.
+112. Powiedz do jakiej klasy zalicza się wzorzec Composite​​Entity i opisz go
+Klasa biznesowa.
+Agregacja​​powiązanych​​encji​​biznesowych​​w​​jedno
+113. Powiedz do jakiej klasy zalicza się wzorzec Transfer​​Object i opisz go
+Klasa biznesowa.
+Zamiast​​wysyłać​​dane​​przez​​klienta​​HTTP​​robi​​to​​klasa,która​​to​​sobie​​zserializuje​​i​​to​​się​​wysyła​​przez​​sieć.​​Serializacja​​może znacząco​​zmniejszyć​​rozmiar​​obiektu,​​a​​mniejszy​​obiekt​​=​​mniej​​idzie​​przez sieć.
+114. Powiedz do jakiej klasy zalicza się wzorzec Transfer​​Object​​Assembler i opisz go
+Klasa biznesowa.
+Tworzy​​skomponowany​​Transfer​​Object​​z różnych​​źródeł
+115. Powiedz do jakiej klasy zalicza się wzorzec Value​​List​​Handler i opisz go
+Klasa biznesowa.
+Cachuje​​rezultaty​​query​​i​​zwraca​​jego​​podzbiór klientowi,​​używa​​DAO​​do​​pobrania​​rezultatów​​z​​bazy
+116. Powiedz do jakiej klasy zalicza się wzorzec Data​​Access​​Object i opisz go
+Klasa integracyjna.
+Ukrywa​​szczegóły​​implementacji,​​enkapsuluje​​logikę danych​​do​​prostszego​​formatu​​do​​zapisu​​i​​wydobywania​​danych​​z​​bazy​​oraz używamy​​​DTO​​​(Data​​Transfer​​Object)​​do​​przesyłania​​danych
+117. Powiedz do jakiej klasy zalicza się wzorzec Service​​Activator i opisz go
+Klasa integracyjna.
+Odbiera​​komunikaty​​i​​w​​sposób​​asynchroniczny​​wywołujeusługi​​biznesowe
+118. Powiedz do jakiej klasy zalicza się wzorzec Domain​​Store i opisz go
+Klasa integracyjna.
+Udostępnia​​mechanizmy​​utrwalania​​i​​odtwarzania​​obiektów biznesowych,​​separuje​​persystencję​​obiektu​​od​​jego​​modelu,​​używa​​się razem​​z​​DAO,​​przydaje​​się​​jak​​mamy​​skomplikowane​​modele​​i​​nie​​chcemy używać​​Entity​​Beans
+119. Powiedz do jakiej klasy zalicza się wzorzec Web​​Service​​Broker​​ i opisz go
+Klasa integracyjna.
+Udostępnia​​usługi,​​używając​​XML​​i​​protokołów sieciowych.
+120. Wymień najważniejsze punkty integracji zorientowanej na dane (w obszerze wielu aplikacji)
+●Baza​​danych​​-​​​np.​​Master​​Data,​​integracja​​poprzez​​wspólną,​​konsystentnąbazę​​danych●Komunikaty​​​-​​wysyłając​​eventy​​przez​​kolejki●RPC​​-​​​zdalne​​wywołanie​​procedury
+121. Wymień najważniejsze punkty integracji zorientowanej na procesy (pomiędzy aplikacjami)
+●orkiestracja​​usług●process​​manager●service​​choreography
+122. Wymień sposoby na loose coupling
+●komunikacja​​asynchroniczna,●semantyka​​zapisana​​w​​komunikacie​​(wykorzystanie​​wiadomości​​tekstowych,które​​można​​później​​dowolnie​​parsować)●ustandaryzowanie​​się​​na​​konkretny​​kontrakt​​(​​wtedy​​logika​​jest​​powiązana​​ztym​​kontraktem,​​a​​nie​​bezpośrednio​​serwisem,​​tu​​chodzi​​o​​np.​​soap​​),●ograniczanie​​pzresyłanych​​informacji​​do​​podstawowych​​(znanych​​wszystkim)typów,​​przesyłanie​​tylko​​niezbędnych​​danych
+123. Wymień rodzaje komunikacji w SOA
+●RPC​​(Remote​​Procedure​​Call)​​-​​​rodzaj​​komunikacji​​synchronicznej,​​narzucony​​zgóry​​interfejs,●Document​​style​​​-​​synchroniczna,​​wszystko​​przekazuje​​jako​​string-liczby,​​struktury itd,​​w​​opisie​​dokumentu​​jest​​opisana​​semantyka,​​czyli​​co​​można​​zrobić​​z​​danymi​​(np.ich​​struktura),​​interfejs​​jest​​zaszyty​​w​​wiadomości,●Message​​Oriented​​Middleware​​​-​​synchroniczna​​lub​​asynchroniczna
