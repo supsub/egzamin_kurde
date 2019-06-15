@@ -1,0 +1,66 @@
+3.DBpedia​​to​​encyklopedia #a.będąca​​kopią​​Wikipediib.zapisana​​w​​postaci​​relacyjnej​​bazy​​danychc.posiadająca​​informacje​​o​​bazach​​danych#d.można​​ją​​odpytywać​​przy​​pomocy​​języka​​SPARQL
+4.SPARQL#a.podobny​​do​​sql#b.nie​​ma​​dobrej​​dokumentacji
+5.Które​​zdania​​to​​Abox: #a.Kluza​​jest​​profesorem​​na​​AGH​​​A-BOX #b.Kutt​​prowadzi​​laboratoria​​z​​PSI​​​A-BOX #c.AGH​​to​​polska​​uczelnia​​​A-BOXa.Wykładowca​​posiada​​adres​​e-mail​​​T-BOX
+6.Do​​czego​​podobne​​są​​ramki:a.Diagram​​stanów#b.Diagram​​klas​​w​​UMLc.Diagram​​sekwencjid.Diagram​​stanów
+7.Co​​moze​​sie​​znajdowac​​w​​ramkach:#a.?​,​nazwab.Metody​​-​​chyba​​tez?imotakc.Stale​​-​​chyba​​tez?imotak
+8.Co​​moze​​znajdowac​​sie​​w​​ramkach:a.Procesy​​odwołujące​​się​​(?)​​do​​danej​​ramki#b.Wartości​​domyślne#c.Procesy​​uruchamiane​​przy​​aktualizacji​​danej​​ramkid.Procesy​​uruchamiane​​co​​jakiś​​odstęp​​czasowy
+9.Zaznacz​​​fałszywe​​​zdania​​dotyczące​​ramek#a.odpowiadają​​diagramom​​stanów​​w​​umlb.mają​​mechanizm​​dziedziczenia#c.można​​w​​nich​​ustawić​​metody​​uruchamiane​​cyklicznie
+1.Open​​world,​​closed​​world​​-​​które​​jest​​w​​Prologu,​​a​​które​​w​​sieciachsemantycznych#d.prolog​​-​​closed,​​sieci​​-​​opene.prolog​​-​​closed,​​sieci​​-​​closedf.prolog​​-​​open,​​sieci​​-​​openg.prolot​​-​​open,​​sieci​​-​​closed
+1.Najbardziej​​sformalizowaną​​reprezentacją​​wiedzy​​jest:a.Reprezentacja​​trójkowa​​​​//to​​nie,​​bo​​w​​tensposób​​reprezentujemy​​sieci​​semantyczne,​​których​​wadą​​jest​​słabesformalizowanieb.Tabele#c.Reguły d.Obraz
+10.Jak​​nazywa​​się​​algorytm​​nie​​korzystający​​z​​heurystyk?#a.algorytm​​ślepyb.algorytm​​zachłannyc.algorytm​​optymalnyd.algorytm​​nieinteligenty
+1.​​Branching​​factor,​​400​​węzłów​​,​​3​​głębokość.a.3b.5#c.7d.12
+2.​​Heurystyka​​dopuszczalna​​które​​jest​​fałszywe:a.​​zawsze​​<=​​h*(n)​​#b.​​​zawsze​​<=​​c(n,n')+h(n')​​(consistency)c.​​może​​się​​zerować​​w​​punkcie​​docelowymd.​​może​​być​​równa​​dokładnemu​​kosztowi​​dojścia​​do​​celu​​
+9.​​Algorytm​​Tree​​Search​​BF​​które​​jest​​​nieprawidłowe:a.​​gwarantuje​​znalezienie​​rozwiązania#b.​​jest​​optymalnyc.​​może​​eksplorować​​pętled.​​znajduje​​wszystkie​​rozwiązania​​optymalne
+12.​​Jakie​​warunki​​muszą​​być​​spełnione,​​aby​​w​​grafie​​istniała​​ścieżka​​między​​każdąparą​​wierzchołków:#a.graf​​musi​​być​​spójnyb.graf​​musi​​posiadać​​co​​najmniej​​jedną​​klikęc.graf​​musi​​być​​kompletnyd.graf​​musi​​być​​acykliczny
+13.​​Jakie​​cechy​​ma​​graf​​spójnye.każde​​2​​wierzchołki​​są​​połączone​​krawędzią​​#f.istnieje​​ścieżka​​między​​każdą​​parą​​wierzchołków​​g.posiada​​co​​najmniej​​1​​klikę?
+16.​​Jakie​​warunki​​powinna​​spełniać​​dobra​​heurystyka?#a.wartość​​zawsze​​<=​​optymalnemu​​rozwiązaniub.wartość​​zawsze​​>=​​optymalnemu​​rozwiązaniu#c.wartość​​zawsze​​>=​​0d.spełniać​​nierówność​​trójkąta​​
+11.Z​​jakich​​wzorów​​można​​by​​skorzystać​​w​​funkcji​​heurystycznej​​(?)​​[dlaodległości​​w​​metryce​​Manhattan]:#a.dx+dyb.sqrt(dx+dy)c.sqrt(dx^2+dy^2)dx^2+dy^2
+4.​​Czego​​się​​nie​​stosuje​​przy​​rozwiązywaniu​​CSP(Constraing​​satisfaction​​problem​​)?a.zrównoleglenieb.dekompozycjac.random​​restart#d.heurystyki​​odległościowe
+12.​​Kolorowanie​​grafu.​​-​​Chyba​​MAPY.​​Dla​​grafu​​liczba​​kolorów​​nie​​ma​​stałegoograniczenia a.4^n​​dokładnie​​4​​koloryb.n^4​​dokładnie​​4​​kolory#c.4^n​​i​​maks​​4​​koloryd.n^4​​i​​maks​​4kolory
+15.Constraining​​satisfaction​​problem​​składa​​się​​z:#a.(skończonego)​​zbioru​​zmiennych,​​których​​wartości​​są​​doznalezienia,#b.skończonych​​dziedzin​​dla​​każdej​​ze​​zmiennych​​(każdazmienna​​może​​przyjmować​​wartość​​tylko​​z​​określonego,​​skończonego​​zbioru;różne​​zmienne​​mogą​​przyjmować​​wartości​​z​​różnych​​zbiorów),#c.ograniczeń,​​które​​muszą​​być​​spełniane​​przez​​odpowiedniepodzbiory​​zmiennych d.funkcji​​heurystyki
+20.Drools​​-​​jakie​​przyjmuje​​rozszerzenia​​plików?a.DOCb.ZIP#c.XLS​​#d.DRL
+22.Drools​​-​​jakie​​algorytmy?closed​​world​​assumption#a.RETE​​​#b.RETEOO c.Gator
+25.CLIPS​​-​​jakiego​​typu​​operatorya.sufiksowe#b.prefiksowe
+27.Czym​​się​​dzieli​​wnioski​​od​​decyzji​​(?)​​w​​CLIPSIe:a.decisionb.then#c.=>d.:-
+28.Definiowanie​​reguł​​w​​CLIPSIe:#a.defruleb.defmodule
+c.defglobald.def
+29.Jakie​​polecenia​​w​​CLIPSie​​odpalają​​Truth​​Maintenance#a.logicalb.insertc.updated.retract
+31.Opis​​overfittingu a.słabe​​dopasowanie​​zbioru​​testowego,​​słabe​​dopasowaniezbioru​​uczącegob.dobre​​dopasowanie​​zbioru​​testowego,​​slabe​​dopasowaniezbioru​​uczacegoc.dobre​​dopasowanie​​zbioru​​testowego,​​dobre​​dopasowaniezbioru​​testowego#d.slabe​​dopasowanie​​zbioru​​testowego,​​dobre​​dopasowaniezbioru​​uczacego
+4.​​​​Na​​co​​można​​przekształcić​​drzewo​​decyzyjne?#a.regułyb.notacja​​trójkowac.ramki
+32.Drzewa​​decyzyjne​​są​​wykorzystywane​​do​​____​​w​​uczeniu​​____a.regresji,​​nadzorowanymb.regresji,​​nienadzorowanym#c.klasyfikacji,​​nadzorowanymd.klasyfikacji,​​nienadzorowanym
+33.Z​​czego​​składa​​się​​drzewo​​decyzyjne:a.Krawędzie​​reprezentujące​​atrybuty​​​(Krawędzie​​reprezentującewartości​​atrybutów)b.Węzły​​reprezentujące​​wartości​​atrybutów​​​(Węzłyreprezentujące​​atrybuty)#c.Liście​​reprezentujące​​decyzjed.Dziuple​​reprezentujące​​ciotkę​​Wiesię
+34.Chcesz​​kupić​​wino,​​ale​​nie​​ma​​twojego​​ulubionego,​​masz​​wiedzę​​na​​tematpoprzednich​​win,​​które​​piłeś:​​etykiety,​​ceny,​​kraj​​pochodzenia,​​rocznik ​​i​​tegoczy​​wino​​było​​dobre ​​W​​jaki​​sposób​​wybierzesz​​wino​​które​​kupisz?​​-​​konkretniepytanie​​było​​która​​metoda​​pozwoli​​Ci​​wybrać​​dobrze​​używając​​najmniejszejilości​​danych a.regresja​​liniowa#b.drzewo​​decyzyjnec.reguły​​asocjacyjned.klasteryzacja
+38.Uczenie​​nadzorowane:#a.Jest​​spoko​​dla​​klasyfikacji​​i​​regresji
+b.Jest​​spoko​​tylko​​dla​​klasyfikacjic.Musi​​człowiek​​nadzorować​​w​​trakcie​​działania​​algorytm
+8.​​Jakie​​typy​​klastrów​​generowane​​są​​przez​​algorytm​​EM:a.rozłączne#b.nachodzące​​na​​siebie#c.probabilystyczned.Hierarhiczne
+9.Które​​algorytmy należą​​do​​nienadzorowanych?#a.Reguły​​asocjacyjne#b.Klasteryzacja#c.Apriori
+41.Jak​​w​​Wece​​ustawić​​położenie​​centroidów#a.zmienić​​centroidPosb.zmienić​​seedc.zmienić​​initialPosd.nie​​da​​się,​​bo​​się​​same​​zmieniają
+44.Twój​​współlokator​​zostawia​​mega​​syf, ​coś​​tam​​coś​​tam ​​Jakiego​​algorytmu użyjesz,​​żeby​​odkryć​​według​​jakiego​​wzoru​​robi​​bałagan ​​Masz​​do​​dyspozycji zapiski​​w​​dzienniku​​z​​listą​​rzeczy​​znajdujących​​się​​na​​łóżku​​danego​​dnia:a.klastering#b.reguły​​asocjacyjnec.regresja​​liniowad.cośtam​​(chyba​​naive​​bayes)
+46.​​Do​​czego​​najlepiej​​nadaje​​się​​Multinomial​​Naive​​Bayes:a.obrazu#b.klasyfikacja​​tekstu
+7.​​Z​​czego​​składają​​się​​sieci​​Bayesowskie?#a.Grafem​​acyklicznymb.Drzewemc.Grafem​​dwudzielnym#d.Grafem​​skierowanym
+8.​​Specyfika​​algorytmów​​biologicznych​​które​​​nieprawdziwe:a.Eksplorowanie​​części​​szukanie​​wiązką#b.Zupełnośćc.Optymalizacja​​lokalnad.Możliwość​​pogorszenia​​wyników​​w​​danym​​kroku
+16.​​Strategia​​szukania​​rozwiązań​​w​​prologu​​jest:a.strategią​​DF,​​ale​​zabezpieczoną​​przed​​pętlami#b.czysta​​strategią​​DFc.strategią​​B
+
+1.​​​​Co​​to​​jest​​przestrzeń​​rozwiązań​​w​​problemach​​typu​​Constraint​​Satisfaction?#A)Zbiór​​wszystkich​​możliwych​​przypisań​​wartości​​zmiennym​​bez​​uwzględnianiaograniczeńB)Zbiór​​wartości​​wylosowanych​​do​​sprawdzenia​​ograniczeńC)Zbiór​​wszystkich​​poprawnych​​rozwiązań​​(z​​uwzględnieniem​​ograniczeń)​​budowany​​wtrakcie​​wykonywania​​algorytmuD)Zbiór​​wszystkich​​możliwych​​przypisań​​wartości​​zmiennym​​z​​uwzględnieniemograniczeń
+2.​​​​Podstawą​​algorytmu​​Naive​​Bayes​​jest​​wielokrotne​​obliczanie A)Współczynników​​równania​​y​​=​​a1x1​​∗​​...​​∗​​anxn#B)Prawdopodobieństw​​warunkowychC)Częstych​​k-zbiorówD)Błędów​​średniokwadratowych
+3.​​Które​​techniki​​reprezentują​​uczenie​​nienadzorowane?#A)Reguły​​asocjacyjneB)Regresja​​liniowa#C)KlasteryzacjaD)Naive​​Bayes
+4.​​Zaznacz​​stwierdzenia​​poprawne​​w​​odniesieniu​​do​​reprezentacji​​trójkowej.A)Obiekt​​może​​być​​listą​​zawierającą​​kilka​​elementów​​świata​​(np.​​Stefan​​–​​jestojcem​​–{Adrian,​​Bartek,​​Cecylia})B)Podmiot​​może​​być​​elementem​​świata​​lub​​stałą​​(literałem)C)Bazy​​reprezentacji​​trójkowej​​mogą​​być​​odpytywane​​za​​pomocą​​języka​​SQL#D)Trójki​​składają​​się​​z​​podmiotu,​​relacji​​i​​obiektu
+5.​​Drzewa​​decyzyjne​​składają​​się​​z:#A)krawędzi​​reprezentujących​​możliwe​​wartości​​atrybutówB)dziupli​​reprezentujących​​wartości​​nieznane#C)wierzchołków​​reprezentujących​​rozważane​​atrybuty#D)liści​​reprezentujących​​podejmowane​​decyzje
+6.​​Problem​​przeszukiwania​​definiujemy​​poprzez​​określenie:#A)Stanu​​początkowego#B)Funkcji​​kosztu​​drogi#C)Testu​​osiągnięcia​​celuD)Algorytmu​​przeszukiwania
+7.​​Przykładami​​problemów​​typu​​Constraint​​Satisfaction​​są:#A)Problemy​​kryptoarytmetyczne​​(np.​​CHCEMY+ZALICZYC=KOLOKWIUM).B)Planowanie​​trasy​​przejazdu​​taksówkiC)Wyszukiwanie​​zbiorów​​najczęściej​​kupowanych​​przedmiotów​​w​​sklepie#D)Układanie​​planu​​zajęć​​na​​wydziale​​EAIiIB
+8.​​Aby​​zdać​​Test​​Turinga​​komputer​​powinien​​posiadać​​umiejętności:#A)Łączenie​​posiadanych​​informacji​​w​​celu​​odpowiedzi​​na​​pytanieB)Możliwość​​zapisywania​​uzyskanych​​informacji
+#C)Porozumiewanie​​się​​w​​języku​​naturalnymD)Przetwarzanie​​obrazów
+9.​​Sieci​​Bayesowskie​​składają​​się​​z...#A)zbioru​​prawdopodobieństw​​warunkowych​​P(X|rodzice(X))​​dla​​każdej​​zmiennejlosowej​​XB)zbioru​​prawdopodobieństw​​P(X)​​dla​​każdej​​zmiennej​​losowej​​XC)grafu​​nieskierowanego,​​w​​którym​​każdy​​wierzchołek​​reprezentuje​​zmienną​​losową#D)grafu​​skierowanego,​​w​​którym​​każdy​​wierzchołek​​reprezentuje​​zmienną​​losową
+10.​​Agentem​​myślącym​​może​​być:A)Czytnik​​kart​​płatniczych#B)System​​regułowy#C)RobotD)Generator​​liczb​​losowych
+11.​​Które​​z​​wymienionych​​heurystyk​​mogą​​być​​wykorzystywane​​w​​problemieposzukiwania​​najkrótszej​​ścieżki​​w​​przestrzeni​​euklidesowej?A)dx​​+​​dy#B)sqrt(dx^2​​+​​dy^2)C)dx​​∗​​dyD)dx^2​​+​​dy^2
+12.​​Deep​​learning:A)Jest​​rodzajem​​uczenia​​nadzorowanegoB)Opiera​​się​​na​​wprowadzeniu​​dokładnej​​wiedzy​​(deep​​knowledge)​​o​​problemie​​dosystemu#C)Jest​​inspirowany​​działaniem​​ludzkiego​​mózgu#D)Nie​​opiera​​się​​na​​linearnej​​logice
+13.​​Ile​​kolorów,​​według​​twierdzenia,​​wystarczy​​do​​pokolorowania​​mapy​​napłaszczyźnie?A)3B)Ilość​​kolorów​​jest​​zależna​​od​​sposobu​​podziału#C)4D)5
+14.​​System​​ekspertowy​​składa​​się​​z:#A)Interfejsu​​z​​użytkownikiemB)Serwera​​WWW#C)Mechanizmów​​wyjaśniających#D)Systemu​​wnioskowania
+15.​​Algorytm​​Rete​​jest​​wykorzystywany​​w:#A)Drools#B)CLIPSC)A*D)SPARQL
+16.​​Algorytm​​A*:#A)Wykorzystuje​​funkcję​​heurystyki
+#B)Zawsze​​znajduje​​rozwiązanieC)Jest​​algorytmem​​typu​​Breadth-FirstSearch#D)Służy​​do​​wyznaczania​​najkrótszej​​ścieżki​​w​​grafie
+17.​​Jakiego​​rodzaju​​notacji​​dla​​operatorów​​używa​​język​​CLIPS?A)PostfiksowejB)Infiksowej#C)PrefiksowejD)Narzędzie​​CLIPS​​nie​​obsługuje​​żadnych​​operatorów
+18.​​Masz​​duży​​zestaw​​zdjęć​​z​​kotkami​​z​​internetu​​oraz​​algorytm,​​który​​określa​​cechyopisujące​​każde​​zdjęcie​​(wiek​​kotka,​​poziom​​”słodkości”​​zdjęcia,​​ilość​​kotków,​​itd).Zastanawiasz​​się​​czy​​można​​ten​​zestaw​​podzielić​​na​​jakieś​​grupy,​​w​​których​​będązdjęcia​​podobne​​do​​siebie ​​Z​​czego​​skorzystasz?A)Reguły​​asocjacyjneB)Drzewa​​decyzyjne#C)KlasteryzacjaD)Regresja​​liniowa
+19.​​Jakie​​rodzaje​​klastrów​​tworzone​​są​​przez​​algorytm​​EM?#A)Klastry​​probabilistyczneB)Klastry​​rozłączneC)Klastry​​hierarchiczne#D)Klastry​​nachodzące​​na​​siebie
+20.​​Które​​wskaźniki​​określają​​skuteczność​​reguł​​asocjacyjnych?A)Power​​(moc)#B)Support​​(wsparcie)C)Frequency​​(częstość)#D)Confidence​​(wiarygodność).
+21.​​Z​​czym​​związany​​jest​​problem​​underfitting?A)Dobre​​dopasowanie​​zbioru​​uczącego,​​słabe​​dopasowanie​​zbioru​​testowegoB)Słabe​​dopasowanie​​zbioru​​uczącego,​​dobre​​dopasowanie​​zbioru​​testowegoC)Dobre​​dopasowanie​​zbioru​​uczącego,​​dobre​​dopasowanie​​zbioru​​testowego#D)Słabe​​dopasowanie​​zbioru​​uczącego,​​słabe​​dopasowanie​​zbioru​​testowego

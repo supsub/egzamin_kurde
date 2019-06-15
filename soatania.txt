@@ -215,7 +215,7 @@ Klasa prezentacyjna.
 Enkapsuluje​​stan​​niezależnie​​od​​protokołu​​żeby​​łatwo​​móc go​​wykorzystać​​w​​różnych​​warstwach​​aplikacji
 105. Powiedz do jakiej klasy zalicza się wzorzec Intercepting​​Filter​​​ i opisz go
 Klasa prezentacyjna.
-Przechwytuje​​podobne​​wiadomości​​i​​puszcza​​przez​​filter,zajmuje​​się​​przetwarzaniem​​żądania​​klienta​​po​​jego​​otrzymaniu​​i​​przywysyłaniu​​odpowiedzi
+Przechwytuje​​podobne​​wiadomości​​i​​puszcza​​przez​​filter,zajmuje​​się​​przetwarzaniem​​żądania​​klienta​​po​​jego​​otrzymaniu​​i​​przy wysyłaniu​​odpowiedzi
 106. Powiedz do jakiej klasy zalicza się wzorzec Front​​Controller i opisz go
 Klasa prezentacyjna.
 Zapewnia​​scentralizowany​​kontroler​​zarządzający​​obsługą żądań,​​służy​​do​​przechowywania​​wspólnej​​logiki​​procesowania​​różnych komend​​widoku,​​różni​​się​​od​​Intercepting​​Filter​​tym,​​że​​jego​​akcje​​zależą​​od requestu,​​a​​ten​​pierwszy​​modyfikuje​​request
