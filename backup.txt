@@ -1,0 +1,58 @@
+1.Czym​​się​​charakteryzuje​​open​​world?
+Może​​istnieć​​wiedza​​która​​nie​​jest​​zawarta​​w​​bazie
+2.Jak liczyć branching factor?
+Dla przykładu :400​​węzłów​​,​​3​​głębokość
+T=400,​​N=3​​->​​400​​=​​1+B+B^2+B^3->​​B​​=​​7
+3.​​Jakie​​warunki​​spełnia​​heurystyka​​consistency?
+Warunek​​consistency​​(spójność)​​oznacza,​​że​​h(n)​​<=​​c(n,a,n’)​​+​​h(n’)
+Warto​​wspomnieć,​​że​​jeżeli​​heurystyka​​jest​​spójna,​​to​​jest​​też​​dopuszczalna.
+Dzięki​​tej​​nierówności​​trójkąta​​(warunek​​spójności)​​jak​​schodzimy​​w​​dół​​drzewa​​to​​wartość funkcji​​f(n)​​jest​​niemalejąca.
+4.Czy heurystyka spójna musić się zerować dla węzłów docelowych?
+Nie
+5.Do czego nienadaje się Algorytm A*?
+Do problemów kryptoarytmetycznych.
+6.Algorytm A* z heurystyką h = 0 działa jak jaki algorytm?
+Dijkstry
+7.Jakie algorytmy się zatrzymają po znalezieniu rozwiązania?
+A*, DFS, BFS. 
+Dijkstra nie.
+8.Z czego składa się problem spełniania ograniczeń? (CSP)
+CSP składa się ze zbioru zmiennych, dziedziny dla tych zmiennych oraz ograniczeń co do wartości (relacji) tych zmiennych.
+9. Jaka jest przestrzeń rozwiązań dla sudoku 9x9?
+9^81
+10.Co to jest przestrzeń rozwiązań w CSP?
+Jest to zbiór wszystkich możliwych przypisań wartości zmiennym, BEZ uwzględniania ograniczeń.
+11.Jaka jest przestrzeń rozwiązań i ilość stanów w wieży Hanoi?
+ilość stanów: 3^n
+ilość kroków w optymalnym rozwiązaniu: 2^n-1
+12. SEND+MORE=MONEY zgrubne oszecowanie
+Mniej niż 10^6
+13.Dla jakich problemów można zastosować algorytm "generate and test"?
+Dla wszystkch problemów
+14.Co nie występuje w systemach regułowych?
+Heurystyka odległościowa
+15.Drools - Open/close world assumption - które z nich jest w nim stosowane?
+closed world assumption
+16 Do czego służy CLIPS
+CLIPS​​-​​środowisko​​open​​source​​do​​tworzenia​​systemów​​ekspertowych.​​Stworzone w​​NASA​​-​​Johnson​​Space​​Center​.
+17.Jaka funkcja odpowiada za priorytet w CLIPSie?
+salience
+18.Zależność między wypitym alkoholem a wynikami egzaminu z PSI - jaka metoda?
+Regresja liniowa
+19. Problem brzytwy - bytów nie mnożyć
+Overfitting
+20. Zastosowanie J48
+Drzewo​​J48​​reprezentuje​​w​​Wece​​algorytm​​C4.5​​który​​jest​​rozwinięciem algorytmu​​Rossa​​Quinalana
+21. Do czego służy J45 w wece?
+Drzewo decyzyjne (jest w ogóle J45? - w wece widze tylko J48)
+22. W jaki sposób ulepszyć uczenie nadzorowane?
+- Zastosować​​obcinanie​​drzewa​​decyzyjnego,​​tzw.​​Pruning
+- Boosting
+- Ensemble learning
+23. Co oznacza k w k-means?
+Ilość klastrów, na które zostaje podzielony wejściowy zbiór
+24. Apriori - jakie wskaźniki?
+-support
+-confidence
+25.Wzór na regułę Horna
+¬​p​​​∨​​¬​q​​​∨​​...​​∨​​¬​t∨​​​u <=> p​​​∧​​​q​​​∧​​...​​∧​​​t​​​​​->​​​​​u
