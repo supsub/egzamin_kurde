@@ -162,5 +162,6 @@ Wsteczny współczynnik rozgałęzienia (ang. backward branching factor) to licz
 X={Xs,…,Xn} skończony zbiór zmiennych (np. kolory w mapie) x={colour}
 D={Ds,…,Dn} skończona domena wartości (np. każdy kolor musi być czerwony, biały lub niebieski) dom(colour) = {blue, black}
 C={Cs,…,Cm} zbiór ograniczeń specyfikujących dopuszczalne kombinacje wartości (np. kraje sąsiadujące mają różne kolory)
-60. Generate-and-test co to + zastosowanie
+60. Generate-and-test co to + przykład
 Metoda rozwiązywania problemów za pomocą generacji wartości i ich sprawdzaniu czy te wartości pasują. Jeżeli nie to generowane są nowe wartości.
+Kolorowanie mapy (Prolog)
