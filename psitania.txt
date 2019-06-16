@@ -3,7 +3,7 @@ Może​​istnieć​​wiedza​​która​​nie​​jest​​zawarta​�
 2.Jak liczyć branching factor?
 Dla przykładu :400​​węzłów​​,​​3​​głębokość
 T=400,​​N=3​​->​​400​​=​​1+B+B^2+B^3->​​B​​=​​7
-3.​​Jakie​​warunki​​spełnia​​heurystyka​​consistency?
+3.​​Jakie​​ warunki​​ spełnia ​​heurystyka ​​consistency?
 Warunek​​consistency​​(spójność)​​oznacza,​​że​​h(n)​​<=​​c(n,a,n’)​​+​​h(n’)
 Warto​​wspomnieć,​​że​​jeżeli​​heurystyka​​jest​​spójna,​​to​​jest​​też​​dopuszczalna.
 Dzięki​​tej​​nierówności​​trójkąta​​(warunek​​spójności)​​jak​​schodzimy​​w​​dół​​drzewa​​to​​wartość funkcji​​f(n)​​jest​​niemalejąca.
@@ -115,4 +115,53 @@ w systemach regułowych jest odpowiedzialny za utrzymanie spójności wiedzy w n
 47. Co to są sieci semantyczne?
 W sieciach semantycznych mamy do czynienia z tzw. reprezentacją trójkową,
 ponieważ każde stwierdzenie dotyczące świata zapisywane jest w postaci trójki:
-Podmiot (Subject) – Relacja (Predicate) – Obiekt (Object),
+Podmiot (Subject) – Relacja (Predicate) – Obiekt (Object)
+48. Linked Data
+połączone dane odczytywalne przez maszyny i ludzi,
+jeśli masz jakieś dane, możesz znaleźć inne powiązane z nimi,
+linki w semantycznym web'ie są reprezentacją obiektów.
+49. Notacja trójkowa, inaczej RDF
+<podmiot> <orzeczenie> <dopełnienie>
+np <the Mona Lisa> <was created by> <Leonardo da Vinci>.
+50. TBox a ABox
+TBox baza terminologiczna, opisującej terminologię i określającej co oznaczają symbole, definiowana w czasie projektowania systemu i definiuje ontologię, zmienia się tylko wraz ze znaczeniem zmian słownictwa, które powinno być stosunkowo rzadko
+ABox baza opisowa, określająca co jest prawdą w pewnym momencie, zawiera wiedzę specyficzną dla danej sytuacji i jest znana tylko w czasie wykonywania.
+51. Open World
+Jeżeli czegoś nie wiemy to jest to po prostu nieznane. Stosuje się w systemach z niekompletnymi informacjami
+Na przykład:
+Jeżeli w historii klinicznej pacjenta nie widnieje informacja o tym, że posiada jakąś alergię, to lekarz nie może założyć, że jej nie posiada
+52. Closed World
+Założenie, że jeżeli o czymś nie wiemy, czy jest prawdziwe to jest nieprawdziwe. Stosuje się w systemach, które posiadają kompletne informacje.
+Na przykład:
+Jeżeli szukasz bezpośredniego lotu z punktu A do B i nie istnieje taki w bazie danych to wynikiem jest "Brak lotu z A do B"
+53. Algorytm A*
+wyszukiwanie najkrótszej ścieżki w grafie ważonym
+Wylicza najkrótszą ścieżkę na podstawie wzoru: f(p)=cost(p)+h(p)
+f(p): koszt ścieżki od węzła startowego do węzła docelowego przechodzącej przez węzeł p
+cost(p): koszt drogi przebytej od węzła startowego pstart do węzła p
+h(p): heurystyka dla węzła p, czyli funkcja szacująca koszt od węzła p do węzła docelowego pgoal
+54. Algorytm zachłanny
+algorytm, który przeszukując wierzchołki grafu probuje dojść do celu wybierając sąsiada, który w danym momencie wydaje się być najbliżej celu.
++ Koszt przeszukiwania jest minimalny, ponieważ algorytm rozpatruje jedynie wierzchołki które są na ścieżce do rozwiązania.
+- Nie ma żadnej gwarancji, że algorytm zachłanny znajdzie optymalne rozwiązanie
+- Algorytm może się zapętlić i nigdy się nie skończyć.
+55. Problem przeszukiwania(pięć elementów)
+stan początkowy In(Arad).
+akcje (opis możliwych akcji) {Go(Sibiu),Go(Timisoara),Go(Zerind)}
+Model przejścia (ang. transition model) RESULT(In(Arad),Go(Zerind)) = In(Zerind)
+Test celu (ang. goal test) {In(Bucharest)}??
+Koszt przejścia (ang. path cost)
+56. Gry o sumie zerowej
+Szczególny przypadek gier o sumie stałej. Zyski jednego gracza sa równe stratom drugiego.
+57. Gry o sumie stałej
+Gra o sumie stałej to taka,w której zysk jednego gracza odbywa się kosztem drugiego. Zyski jednego gracza są proporcjonalne do strat drugiego gracza.
+58. Współczynnik rozgałęzienia (BF - branching factor(dwa rodzaje))
+Przedni współczynnik rozgałęzienia (ang. forward branching factor) to liczba krawędzi wychodzących z danego wierzchołka
+Wsteczny współczynnik rozgałęzienia (ang. backward branching factor) to liczba krawędzi wskazujących na dany wierzchołek
+59. Forma CSP
+X={Xs,…,Xn} skończony zbiór zmiennych (np. kolory w mapie) x={colour}
+D={Ds,…,Dn} skończona domena wartości (np. każdy kolor musi być czerwony, biały lub niebieski) dom(colour) = {blue, black}
+C={Cs,…,Cm} zbiór ograniczeń specyfikujących dopuszczalne kombinacje wartości (np. kraje sąsiadujące mają różne kolory)
+60. Generate-and-test co to + przykład
+Metoda rozwiązywania problemów za pomocą generacji wartości i ich sprawdzaniu czy te wartości pasują. Jeżeli nie to generowane są nowe wartości.
+Kolorowanie mapy (Prolog)
