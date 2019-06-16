@@ -1,0 +1,147 @@
+1.Gramatyka​ ​LL(k)
+Gramatyka bezkontekstowa, która ma taką własność, że zawsze k pierwszych symboli
+słowa końcowego w sposób jednoznaczny określa regułę (produkcję), jaką należy
+zastosować. Gramatyki LL(k) są jednoznaczne.
+2.Związek​ ​automatów​ ​Rabina-Scotta​ ​z​ ​językami​ ​formalnymi
+Klasa języków regularnych jest zbiorem wszystkich języków, które mogą być rozpoznane
+przez automaty Rabia-Scotta (czyli DAS/DFAn)
+3.Kompilator
+Program lub zespół programów, który służy do przekształcenia programu źródłowego
+napisanego w języku programowania wysokiego poziomu do postaci programu
+wykonywalnego. Dodatkowo ma za zadanie wykryć ewentualne błędy podczas
+programowania. Jest to szczególny przypadek translatora tłumaczący program w języku
+wysokiego poziomu na program w języku maszynowym.
+Składa się z: skaner (dokonuje analizy leksykalnej), parser (dokonuje analizy składniowej),
+generator (dokonuje przekładu kodu), optymalizator (jest opcjonalny).
+4.Translator
+Program przekształcający program źródłowy na program docelowy. Traktujemy go jako
+uogólnienie kompilatora.
+5.Interpreter
+Jest to program tłumaczący. Jego celem nie jest przekształcenie programu źródłowego w
+wynikowy. Wykonuje instrukcje lub ich sekwencje po ich przetłumaczeniu na kod wynikowy.
+6.Skaner
+Wyodrębnia podstawowe symbole języka zwane atomami lub tokenami oraz usuwa znaki
+nie mające wpływu na sam program (spacje, komentarze). Jego dane wyjściowe to postać
+pośrednia programu źródłowego zawierająca atomy wraz z krótkim opisem.
+7.Parser
+Ma na celu sprawdzenie poprawności syntaktycznej przez dokonanie rozbioru podprogramu
+na części składowe i zbudowanie odpowiedniego drzewa składniowego.
+8.Generator
+Dokonuje przekładu programu źródłowego w postaci wewnętrznej otrzymanej po analizie
+składniowej na kod wynikowy związany zazwyczaj z konkretną maszyną docelową. Wielu
+instrukcjom odpowiada pewna stała sekwencja generowanych rozkazów zwana wzorcem
+instrukcji.
+9.Analiza​ ​leksykalna
+Polega na wczytaniu strumienia znaków i podzieleniu go na leksemy (słowa leksylane), które
+przekształca się następnie na tokeny (oraz ewentualnie związane z nimi atrybuty).
+10.Leksem
+Ciąg kolejnych znaków stanowiących semantycznie niepodzielną całość.
+11.Token
+Stała (całkowita) reprezentująca wartość wczytanego leksemu.
+12.Metoda​ ​generacyjna​ ​/​ ​zstępująca
+Polega na tym, iż rozpoczynając od symbolu początkowego gramatyki, korzystając ze
+wszystkich jej produkcji próbuje się utworzyć końcowy cel analizy, tzn. wygenerować
+analizowany ciąg symboli.
+Rozpoczyna się od symbolu początkowego i polega na posuwaniu się w analizie w dół, tj.
+budowania drzewa syntaktycznego od jego korzenia do liści.
+13.Metoda​ ​redukcyjna​ ​/​ ​wstępująca
+Polega na tym, iż rozpoczynając od analizowanego ciągu symboli sprawdza się możliwości
+zredukowania go do symbolu początkowego gramatyki korzystając z jej produkcji.
+Prowadzona jest od liści drzewa syntaktycznego i polega na posuwaniu się do góry w stronę
+jego korzenia.
+14.Analiza​ ​z​ ​szybkimi​ ​powrotami
+Powroty wykonywane są tylko w przypadku niezgodności pierwszego podciągu w każdym
+kroku. Jeśli wystąpi zgodność częściowa, to zakłada się, że zgodność wystąpi także dalej, a
+jeśli tak nie będzie, to stwierdza się, że analizowany napis nie należy do języka. Składnię
+większości języków daje się przystosować tak, aby umożliwić analizę z szybkimi powrotami.
+Algorytm szybkiej analizy jest bardziej efektywny, a poza tym nie wymaga pamiętania
+
+informacji o sprawdzonych i niepomyślnych przypadkach generacji. Ograniczeniem
+analizatorów generacyjnych jest to, iż zasadniczo nie pozwalają na lewostronną rekursję
+języków. Wymaga to albo przekształcenia produkcji, albo modyfikacji analizatora.
+15.Tryb​ ​paniki​ ​(wydobywanie​ ​się​ ​z​ ​błędów)
+Najprostsza strategia. Po natrafieniu na błąd usuwane są wszystkie symbole wejściowe po
+kolei, do momentu, kiedy analizator napotka na symbol synchronizacyjny (end lub średnik).
+Nie występuje zapętlenie. Pomijana jest duża ilość symboli wejściowych, zatem metoda
+sprawdza się tam, gdzie w pojedynczej instrukcji nie występuje duża liczba błędów.
+16.Poziom​ ​frazy​ ​(wydobywanie​ ​się​ ​z​ ​błędów)
+Analizator składniowy wykonuje poprawki na pozostałych znakach wejścia, aby możliwa była
+kontynuacja analizy (np. zamienia przecinek na średnik). Należy uważać na pętle
+nieskończone.
+17.Produkcje​ ​dla​ ​błędów​ ​(wydobywanie​ ​się​ ​z​ ​błędów)
+Projektant analizatora składniowego może zdefiniować w danej gramatyce produkcje
+błędnych konstrukcji. Możliwe jest wtedy generowanie odpowiednich komunikatów o
+błędach.
+18.Korekta​ ​globalna​ ​(wydobywanie​ ​się​ ​z​ ​błędów)
+Pozostaje w kręgu zainteresowań teoretyków, ze względu na trudności i koszt
+implementacji. Dla danego błędnego ciągu znaków wejściowych i gramatyki, algorytmy
+znajdują taki podobny ciąg by liczba usunięć, wstawień i modyfikacji symboli była jak
+najmniejsza. Znaleziony ciąg niekoniecznie musi być tam, który chciał uzyskać programista.
+19.Etapy​ ​pracy​ ​GCC
+Prekompilacja, kompilacja właściwa, optymalizacja kodu asemblera, asemblacja,
+konsolidacja
+20.Wyprowadzenie
+Mówimy że napis v wyprowadza bezpośrednio napis w, albo że w jest bezpośrednim
+wyprowadzeniem v , albo też że w redukuje się bezpośrednio do v , co oznaczamy v ⇒ w,
+jeżeli istnieją napisy x , y oraz produkcja U → u, takie, że spełnione są równości:
+v = xUy oraz w = xuy
+Należy zwrócić uwagę, że napisy x oraz y mogą być także puste.
+21.Rozbiór​ ​kanoniczny
+Rozbiorem kanonicznym (albo wyprowadzeniem prawostronnym) nazywamy rozbiór, który
+zawsze rozpoczyna się od lewej strony redukowanej formy zdaniowej, tzn. rozbiór, który w
+pierwszej kolejności redukuje lewostronne symbole formy.
+22.Metody​ ​rozbioru​ ​gramatycznego
+Jeśli forma α wyprowadza formę β, to rozbiorem formy β do α nazywamy ciąg numerów
+produkcji stosowanych w kolejnych krokach aby zredukować formę β do α.
+23.Uchwyt,​ ​podstawa,​ ​osnowa
+Nazywamy tym podciąg symboli, który jest redukowany podczas rozbioru kanonicznego
+24.Forma​ ​zdaniowa
+Dowolny łańcuch wyprowadzalny z symbolu początkowego.
+25.Zdanie
+Szczególny przypadek formy zdaniowej, który posiada tylko symbole terminalne.
+26.Semantyka
+Opis znaczenia przypisywanego zdaniom, odniesienie ich do rzeczywistości. Metody
+definiowania semantyki: operacyjna,​ ​denotacyjna,​ ​aksjomatyczna.
+27.Pragmatyka
+Reguły i zalecenia opisujące stosowanie składni i semantyki. Bada stosunki między językiem
+a użytkownikami. W językach naturalnych – stylistyka.
+28.Formalizacja
+Najłatwiej formalizuje się składnię, semantykę trudniej a pragmatyki właściwie się nie da.
+29.Metajęzyk
+Język służący do opisu języka. Niech orzeczniki autosemantyczne orzekają o sobie (np.
+rzeczownik), zaś heterosemantyczne nie orzekają o sobie.
+30.Alfabet​ ​(V)
+Dowolny skończony zbiór symboli.
+31.Słowo​ ​/​ ​łańcuch​ ​nad​ ​V
+Dowolny skończony ciąg z powtórzeniami elementów z V. Zbiór wszystkich słów nad V = V*.
+32.Chomsky​ ​a​ ​automaty,​ ​klasyfikacja​ ​Chomsky’ego
+Gramatyki typu 0 są równoważne maszynom Turinga.
+Gramatyki kontekstowe (1) są równoważne automatom liniowo ograniczonym.
+Gramatyki bezkontekstowe (2) są równoważne niedeterministycznym automatom ze stosem.
+Gramatyki regularne (3) są równoważne automatom skończonym.
+33.Gramatyka​ ​nieskracalna
+Jeśli w definicji gramatyk klas 1, 2 i 3 przyjmiemy, że po prawej stronie produkcji nie
+występuje słowo puste (ε) wówczas gramatyki te nazwiemy nieskracalnymi, zastosowanie
+produkcji do ciągu symboli daje w wyniku ciąg symboli nie krótszy od wyjściowego.
+Nieskracalność gramatyki ułatwia rozstrzygnięcie problemu, czy zadany skończony ciąg
+symboli terminalnych, da się wyprowadzić (jest wyprowadzalny) z głowy gramatyki.
+34.Zdanie​ ​wieloznaczne
+Jeżeli istnieje więcej niż jedno drzewo syntaktyczne wprowadzania tego zdania.
+35.Gramatyka​ ​wieloznaczna
+Język przez nią generowany zawiera przynajmniej jedno zdanie wieloznaczne. Języki, dla
+których nie można zdefiniować gramatyki jednoznacznej nazywamy istotnie wieloznacznymi.
+36.Gramatyka​ ​jednoznaczna
+Gramatyka, która nie jest wieloznaczna. Tzn. Nie da się wskazać dwóch różnych
+wyprowadzeń dla tego samego słowa.
+37.Gramatyka​ ​rekursyjna
+Produkcje zawierają ten sam symbol nieterminalny po obu stronach. Lewostronna​ ​(np.
+A->Aa),​ ​prawostronna​ ​(A->aA),​ ​zwykła​ ​(A->aAb).
+38.Gramatyka​ ​nieskracająca
+Gramatykę G = <V, ∑, P, S>, w której produkcje mają postać α → β , gdzie α i β są takimi
+łańcuchami symboli tej gramatyki, że łańcuch β jest przynajmniej tak długi jak łańcuch α (|α|
+≤ |β|) oraz dodatkowo dopuszczona jest produkcja S → ε, jeśli język zawiera słowo puste,
+nazywamy gramatykami kontekstowymi, gramatykami monotonicznymi, gramatykami
+nieskracającymi lub gramatykami klasy „1”.
+39.Stany​ ​nierozróżnialne
+Dwa lub więcej stanów, które można zastąpić pojedynczym z odpowiednią modyfikacją
+wejść tak, że nowy automat będzie równoważny.
