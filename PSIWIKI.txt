@@ -1,0 +1,752 @@
+﻿--Heurystyki dla siatki--
+
+1. Manhattan distance - heurystka dla kwadratowej siatki. Koszt przejścia z jednego punktu do drugiego wyonsi X + Y
+2. Diagonal distance - heurystyka dla kwadratowej siatki z możliwością pójścia na skos. Wtedy najkrótsza droga: gdy X>Y to kosztSkosu * Y + kosztBoku * (X-Y)
+3. Euclidean distnace - heurystyka dla siatki, gdy mamy możliwość pójscia w dowolnym kierunku, wtedy droga = kosztPrzejścia * sqrt((x2-x1)^2 + (y2-y1)^2)
+4. Euclidean distance squared - heurystyka dla siatki, tak jak euclidean distance ale bez pierwiastka, zły pomysł ponieważ nastąpi dominacja h(n) (f(n) = g(n) + h(n))
+5. Multiple goals - w przypadku gdy chcemy znaleźć jakąkolwiek ze ścieżek należy skonstruować heurystykę będącą minimum z heurystyk każdej ścieżki, w przypadku gdy chcemy znaleźć wszystkie najlepsze
+ścieżki najlepszą opcją będzie algorytm Dijkstry z wczesnym zakończeniem w przypadku znalezienia wszystkich ścieżek.
+6. Breaking ties - gdy mamy kilka ścieżek o tej samej długości musimy zdecydować która jest najlepsza poprzez: Dostosowanie wartości g i h aby została tylko jedna ścieżka, preferowanie ścieżek wzdłuż
+lini prostej od początku do celu, patrzeć wyłącznie na h
+
+--A*--
+
+Algorytm do znajdowania ścieżki w grafie. Posługując się funkcją f(n) = g(n) + h (n) gdzie g(n) - droga od początku do danego węzła, h(n) droga od danego węzła do celu (heurystyka).
+W każdej iteracji wybieramy ten węzeł gdzie funkcja f(n) przyjmuje najmniejszą wartość.
+Jest algorytmem zupełnym i optymalnym - czyli zawsze znajdzie drogę do celu i będzie ona najkrótszą.
+Warunki optymalności: h(n) musi byc heurystyką dopuszczalną czyli zawsze poda minimalny koszt, oraz musi być heurystyką spójną.
+
+--Algorytm zachłanny--
+
+Algortym znajdujący ścięzkę do celu w grafie. Wybiera zawsze sąsiada który w momencie sprawdzania wydaje się najbliżej celu więc f(n) = h(n), gdzie h(n) - heurystyka.
+Zalety: koszt przeszukiwania jest minimalny
+Wady: Brak gwarancji optymalności, algorytm nie jest zupełny (może się zapętlić)
+
+--Definicje grafów--
+
+Graf skierowany - krawędzie między node'ami wskazują relację
+Graf nieskierowany - krawędzie między node'ami nie wskazują w którą stronę idzie krawędź
+Sąsiedztwo - gdy dwa node'y są połączone krawędzią. Jednak w przypadku grafu skierowanego sąsiedztwo idzie tylko w jedną stronę (tzn. jeśli jest krawędź z x do y, to y jest sąsiadem x ale nie na odwrót)
+Ścieżka - jest to zbiór node'ów pomiędzy node'm poczatkowy a końcowym
+Cel - funkcja która przyjmuje wierzchołek i zwarca bool
+Problemy za pomocą grafów -problem przedstawiony za pomocą grafów jest równaznaczne z tym, że rozwiązaniem będzie znalezienie ściężki w danym grafie. Więc rozwiązanie będzie znalezienie
+ścieżki od nodea startowego do końcowego, a rozwiązanie optymalne jest w przypadku gdy ta ścieżka jest najkrótsza.
+Cykl - ścieżka dla której node początkowy i końcowy to ten sam node
+Drzewo - graf skierowany acykliczny, z jednym wierzchołkiem nie posiadającym krawędzi na niego wskazujących
+Przedni współczynnik rozgałęzienia - liczba krawędzi wychodzących z danego node, wsteczny to wskazujących na dany node
+
+--Definicja problemu przeszukiwania--
+
+Środowisko jest: zauważalne, dyskretne, znane, deterministyczne.
+Problem przeszukiwania definiuje się za pomocą pięciu komponentów: stan początkowy, akcje, model przejścia, test celu, koszt przejścia
+
+--Przeszukiwanie lokalne--
+
+Algorytym przeszukiwania lokalnego są odpowiednie dla problemów gdzie nie liczy się koszt trasy tylko stan rozwiązania. Ich zaletą jest mała ilośc potrzebnej pamięci, często mogą znaleźć sensowne
+rozwiązanie w dużych lub nieskończonych przestrzeniach stanów.
+
+1.Hill-climbing - czyli wybór zawsze najlepszej wartości (poruszanie się w kierunku maksimum). Jednak tutaj może wystąpić lokalne maksimum, grzbiet lub płaskowyż co zatrzyma algorytm
+wtedy można ulepszyć go poprzez wprowadzenie skoku w bok. Odmiany algorytmu to stochastyczny hill climbing - wybiera losowo spośród możliwych ruchów pod górę,
+first-choice hill-climbing - losowo generuje następników dopóki nie znajdzie lepszego niż obecny, random-restart hill-climbing - przeprowadza serie hill-climbing z losowymi punktami startowymi i wybiera najlepszy wynik
+2. Symulowane hartownie - wybiera losowy ruch, jeśli poprawia sytuację to jest akcpetowalny jeśli nie to ruch jest akceptowalny z prawdopodobieństwem mniejszym niż jeden (prawdopodobieństwo maleje)
+3. Local beam search - losowo generuje k stanów, następnie na każdym kroku generowani są następcy tych k stanów, jeśli któryś jest celem to algorytm zatrzymuje się, jeśli nie to wybiera k najlepszych stanów
+i znowu zaczyna działanie.
+4. Algorytmy genetyczne - wariant stochastic beam search jednak następcy są generowani przez połączenie dwóch stanów macierzystych a nie przez modyfikację pojedynczego stanu.
+
+--Przeszukiwanie grafów--
+
+1.DFS - w głąb, korzystamy ze stosu (LIFO). Zalety: Złożnośc pamięciowa O(maks_głębokośc*ilość_rozgałęzień). Wady: mozliwośc zapętlenia, nie jest optymalny, złożoność obliczeniowa O(liczba_wezłów)
+2.BFS - wszerz, korzytamy z FIFO. Zalety: kompletność, optymalność. Wady: Złożność czasowa i pamięciowa O(ilosc_rozgalęzein^głębokość).
+3.Depth limited search - podobne do DFS ale realizowane jedynie do głębokości l. Zalety: Nie wejdzie w pętle nieskończoną, nie trwa długo. Wady: Może nie znaleźć rozwiązania gdy l zbyt małe,
+nieoptymalne, Złożoność czasowa i pamięciowa
+4. Iterative deepening depth first search - tak jak depth limited search jednak jak nie znajdzie rozwiąznia do poziomu l to zwiększy go o jeden i znowu rozpocznie przeszukiwanie i tak aż do skutku.
+Zalety: kompletność, złożność czasowa i pamięciowa. Wady: dodatkowy koszt kilkukrotnego odwiedzenia wyżyszchy poziomów drzewa
+5. Uniform Cost Search - działa podobnie jak BFS i algorytm Dijkstry ale kolekuje węzły na podstawie kosztu skumulowanych ścieżek do danego węzła. Zalety: Nie bierze pod uwagę ilości węzłów a tylko
+skumulowany koszt drogi. Wady: możliwośc nieskończonej pętli. Nie działa gdy koszty drogi są ujemne.
+6. Bidirectional Search - puszczenie na raz dwóch przeszukiwań od węzła początkowego do docelowego i od docelowego do początkowego, przez co maleje złożnośc obliczeniowa. Zalety: złożonośc obliczneiowa
+Wady: Konieczność szukania w tył, konieczność zdefiniowania stanu docelowego, brak gwarancji optymalności.
+7. Lowest cost first search - działa jak BFS ale kolejkuje na podstawie kosztu od stanu początkowego.
+
+--CSP--
+
+Constraint Satisfaction Problems to matemayczne pytania zdefiniowane jako zbiór obiektów, których stan musi spełniać szereg ograniczeń. Problemy CSP przybierają formę trójki <X,D,C> gdzie
+X - skończony zbiór zmiennych, D - skończona domena wartości, C - zbiór ograniczeń. Każda zmienna X może przybierać wartość z domeny D, a każde ograniczenie C składa się z pary <scope,rel> gdzie scope
+to zbiór zmiennych a rel to relacja definująca wartości.
+Aby rozwiązac CSP musimy zdefinować przestrzeń stanu i pojęcie rozwiązania. Każdy stan przypisania w CSP jest definiowany jako przypisanie wartości niektórym lub wszystkim zmiennym.
+Przypisanie które nie narusza żadnych ograniczeń nazywane jest spójnym lub dozwolonym. Przypisanie kompletne to przypisanie w którym przypisana jest każda zmienna.
+
+--Local Search w CSP--
+
+Algorytmy local search są wykorzystwane tam gdzie przestrzeń poszukiwań jest bardzo duża. W tych algorytmach nie wystepuję gwarancja znalezienia rozwiązania.
+
+1. Ogólny algorytm local search w CSP - przypisuje zmiennym wartości losowo a następnie w każdym kroku próbuje to poprawić poprzez podjęcie kroku naprawy przypisania, podjęcie losowego kroku, restaru
+przestrzeni i rozpoczęcie prodecury od początku. Może przyjmować dwie wersje random sampling - wybiera randomowe przypisanie, random walk - randomow wybiera zmienną i wartość dla niej.
+2. Iterative Best Improvement - wybiera następce najlepeij poprawiającego funkcję ewaluacji, jeśli są remisy to wybiera losowo sposród najlepszych. Algorytm nie jest kompletny.
+3. Randomizowane algorytmy - algorytm iterative best improvement może mieć problem gdy napotka na ekstrema lokalne, dlatego aby poradzić sobie z tym problemem można wporwadzić
+a) Losowy restart - wszystkie wartości w naszej przestrzeni poszukiwan są wybierane losowa za każdym razem
+b) Losowy spacer - polega na przeplataniu losowości oraz kroków optymalizacyjnych.
+
+--Local Search Variants--
+
+1. Most improving step - kolejka priorytetowa zawierająca pary zmienna-wartość wraz z ich wagami zależnymi od wartośći przypisanej do danej zmiennej i jej sąsiadów. Podczas każdego kroku
+wybiera parę z najmniejszą wagą (poprawiającą sytuację).
+2. Two stage Step - kolejka priorytetowa zawierająca pary zmienna-wartość wraz z wagami które są zależne od ilości konfliktów w których uczestniczą, a następnie wybiera zmienną która uczestniczy w największej
+ilości konfliktów, a następnie randomowo przydziela jej wartość lub wybiera wartość która minimalizuje ilośc konfliktów.
+3.Any Conflict - wybieramy losową zmienną uczestnicząca w konflikcie w trakcie każdego kroku algorytmu i przydzielamy jej losową wartość lub taką która minimalizuje ilośc konfliktów
+4.Simulated annealing - stochastyczny algorytm wyszukiwania lokalnego, wybiera losową zmienną oraz losową wartość, jeżeli ta wartość nie zwiększa ilość konfliktów to algorytm akcpetuje przypisanie
+w innym wypadku w zależności od prawdopodobieństwa może akceptować lub nie przypisanie.
+
+--Backtracking--
+
+Bazujący na metodzie DFS algorytm wyszukiwania rozwiązań niektórych problemów obliczeniowych np. CSP, który stopniowo wybiera wartości dla kolejnych kandydatów i nawraca,
+jeżeli nie odnajzdie żadnych możliwych do przypisania wartości.
+Wybór zmiennych:
+1. Statyczne porządkowanie zmiennych - kolejnośc wyboru zmiennych jest określana a priori
+2. Minimum Remainig Values - najpierw wybiera jest zmiena dla której liczba możliwych przypisań jest najnmiejsza, w celu szybkiego wykrycia niepowodzenia.
+3. Degree Heuristic - w pierwszej kolejnośc wybiera zmienną która występuję w największej ilości ograniczeń.
+Wybór wartości:
+1. Least-constraining-value heuristic - preferowana jest wartość która wyklucza najmnniej opcji dla sąsiadów.
+Wnioskowanie - forward checking: Gdy przydzielmy jakąś wartość, to dla wszystkich nieprzydzielonych zmiennych usuwamy z ich możliwości te wartości które nie będą spełniany warunków.
+Inteligentny backtracking - zamaist cofać się do punktu ostatniej decyzji, wykonujemy backjump i cofamy się do zmiennej, która spowodowała  konflikt.
+Constraint learning - pomysł znalezeinia minimalnego zestawu zmiennych z zestawu konfliktów, który powoduje problem, taki zestaw zmiennych z odpowiadającymi im wartościami nazywa się no-good.
+Następnie rejestrujemy te wartości i może to być potem wykorzystane np. w forward checking.
+
+--Generate and test--
+
+Algorytm polegający na generacji wartości i sprawdzaniu czy te wartości pasują. Więc najpierw pobierana jest jedna lub więcej zmiennych. Następnie następuje sprawdzenie czy zmienne pasują z określoną
+wartością. Jeśli nie to proces powtarzamy.
+
+--Możliwe światy--
+
+Możliwy sposób w jaki świat mógłby istnieć. Każdy z możliwych światów jest zdefiniowany pewnymi zmiennymi algebraicznymi, które opisują zasady i właściwości danego świata. Każda zmienna
+posiada dziedzinę. Zmienne mogą być dyskretne (dziedzina jest skończona), binarne (dziedzina składa się z dwóch elementów), ciągła (dziedzina jest nieskończona).
+Clarity principle - agent musi mięc pełną wiedzę o wartościach danych zmiennych tzn. do każdej ze zmiennych przypisujemy pewne znaczenie.
+
+--Problem kolorowania mapy--
+
+Każda istniejąca mapę można zabarwić czterema kolorami w taki sposób, iż każde państwa posiadające wspólnągranicę są zakolorowane innym kolorem.
+Kolorowanie grafu - proces przypisania elementom składowym grafu (wierzchołkom, krawędziom) pewnych wartości (kolorów). Pokolorwanie grafu to znaczy przypisanie każdemu wierzchołkowi
+koloru, a gdy sąsiadujące wierzchołki zawsze mają inne kolory od siebie to jest to legalne pokolorowanie.
+Liczba chromatyczna grafu to minimalna ilośc kolorów potrzebna do legalnego pokolorowania grafu.
+
+--Propagacja ograniczeń--
+
+Metoda rozwiązywania problemów zgodności z ograniczeniami. Polega na nałożeniu ograniczeń na zmienną, a tym samym zmniejszeniu ilości możliwych wartości kolejnych zmiennych. Głównym założeniem
+jest zachowanie lokalnej spójności. Traktując zmienną jako węzeł w grafie, a każde ograniczenie jako krawędź to wtedy wymuszenie lokalnej spójności powoduje wyeliminowanie z grafu tych zmiennych, które
+nie spełniają wymagań.
+Na lokalną spójnośc składa się:
+1. Spójność węzłowa - zmienna jest spójna węzłowo jeśli wszystkie wartości z jej dziedziny spełniają ograniczenia. Cała sieć jest spójna węzłowo jeśli wszystkie zmienne są spójne węzłowo.
+2. Spójnośc krawędziowa - zmienna jest spójna krawędziowo jeśli każda z wartości z dziedziny zmiennej spełnia dwuargumentowe ograniczenia tej zmiennej. Algorytm który doprowadza CSP do spójności
+krawędziwoej jest AC-3
+3. Spójność ścieżki - jeśli rozpatrujemy zbiór zmiennych, to jest on spójny ścięzką do kolejnej zmiennej jeśli wszystkie wartości z domen z tego zbioru zmiennych spełniają ograniczenia oraz istnieje przypisanie
+do tej kolejnej zmiennej które również spełnia ograniczenia.
+
+Spójność K - ostrzejsza forma propagacji. Graf jest k spójny jeśli dla dowolnego zestawu k-1 zmiennych i dla jakiegokolwiek spójnego przypisania do tych zmiennych można przypisać do dowolnej
+k'tej zmiennej spójną wartość.
+
+--Variable eliminations--
+
+Jedna z metod szukania rozwiązań CSP. Polega ona na eliminacji zmiennych jedna po drugiej z danego CSP. Najpierw wybierana jest zmienna do usunięcia, następnie wszystkie ograniczenia zależne od tej zmiennej
+są usuwane i zastąpione jednym bez tej zmiennej. Mając uproszczone ograniczenia, rekurencyjnie usuwamy kolejne zmienne, aż dojdziemy do jednej.
+
+--Algorytm Rete--
+
+Algorytm dopasowania do wzorca implementowany w systemach reguł produkcyjnych. Jest on wykorzystywany w językycha programowania systemów produkcyjnych OSP. Jego celem jest zwiększenie prędkości
+systemów wnioskowania progresywnego.
+Główne cechy: Redukuje lub eliminuje redundancje określonego typu poprzez użycie węzłów, przechowuje częsciowe dopasowania gdy łączy rózne typy faktów, umożliwia efektywne usuwanie fragmentów
+pamięci, pozwala na bardzo wiele dopasowań w krótkim czasie.
+
+Jego działanie w skrócie: Podczas kompilacji następuje budowa drzewa warunków i zależności, które mozna porównać do filtrów przez które przepuszczane są w fazie realizacji obiekty.
+Zalety: Efektywne przetwarzanie układów złożonych z setek lub tysięcy reguł
+Wady: Wymaga dużo pamięci
+
+--Dlaczego silnik regułowy?--
+
+Programowanie deklaratywne, separacja logiki i danych, szybkośc i skalowalnośc, centralizacja wiedzy, integracja narzędzi, narzędzie wyjaśniające, zrozumiałe reguły
+
+Kiedy stosować rule engine? Kiedy problem nie jest trywialny, kiedy problem jest zbyt skomplikowany jak na tradycyjny kod, kiedy logika się często nie zmienia, kiedy eksperci dziedzinowi są dostepni
+ale nie są to eksperci techniczni.
+
+--Forward and backward chaining--
+
+W regułowym systemie ekspertowym silnik wnioskowania porównuje każdą regułe zawartą w domenie wiedzy z faktami w bazie danych. Jeżeli nastąpi zgodnośc następuje np. stworzenie nowego faktu.
+Tak tworza się łańcuchy wnioskowania, które pokazują jak system ekspertowy stosuje reguły aby osiągnąć rozwiązanie (wniosek). Silnik wnioskowania musi decydować kiedy i które reguły powinny być
+zastosowane i dlatego istnieją dwa główne sposoby stosowania reguł:
+1. Forward chaining - metoda opierająca się na danych, tzn. najpierw dane są zbierane a potem zostaje wnioskowane z tych danych cokolwiek jest wnioskowalne. Jednak w tym sposobie wiele reguł
+może zostać zastosowanych chociaz kompletnie nic nie wnoszą do końcowego celu.
+2. Backward chaining - metoda opierająca się na celu, tutaj system ekspertowy posiada cel i silnik ekspertowy próbuję go udowodnić. Najpierw przegląda domenę wiedzy w poszukiwaniu reguł które mogą
+posiadać szukane rozwiązanie, a następnie próbuje dopasować wartości z bazy danych do tych reguł.
+
+Forward vs backward - w zależności od tego do czego potrzebujemy łańcucha rozumowania inna metoda okazuje się lepsza. Jeśli potrzebujemy zebrać troche danych i sprawdzić co możemy z nich uzyskać
+lepszy okaży się forward chainign, jeśli posiadamy juz jakiś cel i chcemy udowodnić jego prawdidłowość lepszy będzie backward chaining. Często jednak używana jest kombinacja obu.
+
+--Budowa systemu ekspertowego--
+
+System ekspertowy oparty na regułach składa się z:
+1. Bazy wiedzy (zawiera wiedzę z dziedziny w postaci reguł)
+2. Bazy danych (zawiera fakty)
+3. Mechanizm wnioskujący (dopasowuje reguły z bazy wiedzy do faktów z bazy danych)
+4. Mechanizm objaśniający (udziela informacji o sposobie uzyskania wyniku)
+5. Interfejs użytkownika (pozwala na komunikację między system eksperckim a użytkownikiem)
+6. Interfjs zewnętrzny (pozwala na korzystanie z plików zewnętrznych oraz programów konwencjonalnych)
+7. Interfejs developera (zawiera narzędzie pomocnicze)
+
+Powłoka systemu ekspertowego - system ekspertowy bez wprowadzonej wiedzy oraz danych.
+
+--Osoby tworzące regułowy system ekspercki--
+
+1.Ekspert - osoba znająca dobrze dany obszar wiedzy i potrafiąca rozwiązywać problemy z tego obszaru
+2.Inżynier wiedzy - projektuje, buduje i tekstuje system ekspercki. Jest odpowiedzialny za wybór odpowiedniego zadania systemu oraz za ustalenie metod użytych do obsługi faktów i reguł.
+3.Programista - odpowiedzialny za programowanie właściwe, opisy domeny wiedzy tak aby był zrozumiały dla komputera.
+4.Project Manager - lider zespołu, odpowiedzialny ze przebieg projektu.
+5.End-user - użytkownik
+
+--Korzystanie z systemów eksperckich--
+
+1. System ekspercki jako doradca - problem który nie potrafimy rozwiązać przedstawiamy systemowi i on na podstawie bazy wiedzy wnioskuje rozwiązanie
+2. System krytykuje nasze rozwiązania - mamy problem i pomysł na rozwiązanie, przedstawiamy to systemowi i on wnioskuje słabe strony naszego pomysłu
+3. Powierzenie systemowi ekspertowemu sterowania pewnym procesem - system analizuje np. zmianyn a rynku i na podstawie bazy wiedzy podejmuje decyzje o kupnie/sprzedaży
+
+--Rozwiązywanie konfliktów w systemie eksperckim--
+
+Sposób wyboru wywoływanej reguły gdy więcej niż jedna reguła może być uruchomiona. Metody:
+1. Highest priority - pod uwagę brana jest kolejność reguł w bazie wiedzy, w wypadku konfliktu wybierana jest akcja która wystąpiła pierwsza
+2. Longest matching strategy - w wypadku konfliktu wybierana zostanie akcja która sprawdza większą ilość szczegółów
+3. Data most recently entered - wybierana jest akcja z najświeższą datą dodania
+
+Metawiedza i metareguły są wykorzystywane w systemie aby lepiej rozwiązywać konflikty.
+Metawiedza - wiedza o wiedzy, wiedza na temat wykorzystania i kontroli wiedzy o danej dziedzinie
+Metareguła - określa strategię stosowania reguł specyficznych dla zadania w systemie eksperckim.
+
+--Właściwosci systemu ekspertowego--
+
+Duża efektywność, umiejętnośc wytłumaczenia w jaki sposób została podjęta decyzja, rozumowanie symboliczne (reprezentacja zasad oraz faktów za pomocą symboli), brak potrzeby posiadania kompletnych
+i pewnych danych, odseparowanie wiedzy od mechanizmu jej przetwarzania (łatwiej utrzymać system)
+
+--Zalety i wady systemu ekspertowego--
+
+Zalety: naturalna reprezentacja wiedzy, ujednolicona struktura, oddzieledznie wiedzy od logiki, radzenie sobie z niekompletną i niepewną wiedzą
+Wady: nieprzejrzyste relacje między regułami, nieefektywna strategia wyszukiwania, niezdolnośc do nauki
+
+--Drzewa decyzyjne--
+
+Prosta reprezentacja do klasyfikowania przyładów, czyli struktura pozwalająca nam dany przykład zakwalifikować do jednej z określonych kategorii.
+Drzewo decyzyjne to drzewo którego:
+1. Każdy wierzchołek  niebędący liściem jest opisany warunkiem (czyli funkcją zwracającą wartość logiczną)
+2. Każdy wierzchołek posiada dwoje dzieci, jedno jako true a drugie jakie false
+3. Każdy liść jest jedną z możliwych klas (oszcowaniem jej prawdopodobieństwa)
+Poszukiwanie odpowiedniego drzewa decyzyjnego - jednym z podejść jest wybieranie najmniejszego drzewa zgodnego z danymi (czyli najmniejsza głębokość lub ilość wierzchołków). Aby go znaleźć często
+używa się algorytmów zachłannych bo przestrzeń przeszukiwań jest przeważnie ogromna.
+Często stosuje się decision tree learning - algorytm przyjmujące strategię dziel i zwyciężaj - najpeirw  testowany jest najważniejszy atrybut (czyli taki który najbardziej wpływa na klasyfikację),
+i dzieli problemy na podproblemy które następnie są rozwiązywane rekursywnie.
+Aby móc użyć drzew decyzyjnych w szerszej gamie zastosowań należy zwrócić uwagę na kilka problemów: brakujące dane (jak zaklasyfikować przykład z brakującymi danymi), atrybuty o wielu wartościach
+(przez to błednie może być obliczana jego przydatność), ciągłe oraz całkowito-liczbowe wartości atrybutów wejściowych (mają nieskończoną liczbę wartości )
+
+--Nadmierne dopasowanie w drzewach decyzyjnych--
+
+Kiedy algorytm próbuje dopasować rozróżnienia które są w danych treningowych ale nie występują w zbiorze testowym. Sposoby przeciwdziałania: Dzielić tylko w momencie gdy podział jest przydatny,
+pozwolić na nieograniczony podział, a potem przycinać drzewo w miejscach gdzie wystąpiły nieograniczone podziały.
+
+--Ewaluacja modeli--
+
+Opiera się na odkryciu hipotezy która najlepiej opisuje przyszłe, zakładane dane.
+Przyszłe dane - każdy przykładowy punkt danych jest jakąś zmienną której wartośc zaobserwowana jest niezależna od poprzednich przykładów. Przykłady które spełniają te założenia są nazywane
+niezależnymi i identycznie rozłożonymi.
+Najlepszy opis - tylko dlatego, że hipoteza ma mały próg błędu na zbiorze próbnym nie oznacza że jest dobra. Dlatego dobrze zastosować:
+1. Holdout cross validation - rozdzielenie danych na treningowe i testowe
+2. k fold cross validation - każdy przykład ma dwie role treningową i testową. Dzielimy zbiór na k równych podzbiorów i wykonujemy k rund uczenia się, w każdej takiej rundzie 1/k danych zatrzymujemy
+jako zbiór testowy. Średni próbny wynik po k rundach powinien być dobrym przybliżeniem.
+Podglądanie - używanie zbioru próbnego do wyboru i oceny hipotezy.
+Przy wyborze modelu rozważamy złożonośc hipotezy, próg błędu oraz funkcje straty (czyli ile tracim użyteczności)
+Skale uczenia się:
+1. Small scale learning - używane w tradycyjnych metodach w statystyce i wczesnych latach uczenia maszynowego, liczba przykładów treningowych waha się od kilku do kilkudziesięciu tysięcy. Błąd generalizacji
+wynika z błędu aproksymacji (za mało danych)
+2. Large scale learning - używane w ostatnich latach, liczba przykładów wynosi często milion. Błąd generlizacji tutaj wynika z ograniczeń obliczeń (zbyt skomplikowane)
+Regulacja - alternatywą dla cross validation jest szukanie hipotezy która bezpośrednie minimalizuje sumę ważoną empirycznej straty i złożoności hipotezy (kosztu). Jednak aby ją zwerfikować
+nadal użyjemy cross validation. Regulacja szuka funkcji bardziej regularnej lub mniej złożonej
+Innym sposobem uproszczenia modelu jest redukcja rozmiarów (feature selection może być wykonywany w celu odrzucenia nieistotnych atrybutów)
+
+--Nadmierne dopasowanie--
+
+Gdy system uczący dokonuje predykcji na podstawie rgularności występujących w danych treningowych, a które później nie występują w świecie z którego pobrano te dane.
+Tzn. system ma bardzo dobrą skuteczność na zbiorze treningowym, a słabą na zbiorze  testowym.
+
+Sposoby radzenia sobie:
+1. Pseudocounts - stosowane gdy reprezentacja problemu jest prosta. Zakłada, że zdecydowana większośc danych jest zbliżona do średniej, co niweluje zaburzenia modelu spowodowane ekstremami.
+Jej działanie to założenie pewnej średniej wartości dla populacji, a następnie za pomocą średniej kroczonej ocenianie konkretnego zbioru danych.
+2. Regularization - zamiast optymalizować dopasowanie do danych możemy zoptymalizować dopasowanie do danych oraz dodatkowo nagradzać prostotę i karać złożoność. Karanie jest zwane regulatorem.
+3. Cross validation - dzielimy zbiór na zbióre treningowy i testujący (walidacyjny). Uczymy na podstawie pierwszego zbioru, a sprawdzamy efekt na drugim.
+4. Metoda k krotnej walidacji - losowy podział na k zbiorów o zbliżonej wielkości. Ocena ustawionego parametru poprzez trenowanie k razy używając jednego z k zestawów jako testującego, a reszty jako
+zestawów treningowych, następnie optymalizacja na podstawie błędu w każdym przykładzie i na końcu zwrócenie modelu z wybranymi ustawieniami parametrów.
+
+
+--Back propagation--
+
+Algorytm służący do wyznaczania gradientów funkcji kosztu. Założenia dla funkcji kosztu są takie: Żeby dało się ją zapisać jako średnią oraz żeby mogła być zapisana jako funkcja wyjść.
+Przebieg algorytmu: Input (zbiór aktywacji), Feedforward, Output error, Backpropagate the error, Output (gradient funkcji kosztu).
+
+--Machine learning workflow--
+
+Przepływ pracy można podzielić na 4 obszary: Przetwarzanie danych, Tworzenie treningowych setów, testowanie ewaluacja wybór algorytmów, dystrybucja i testowanie
+
+--Learning issues--
+
+Problem uczenia się można zdefiniować jako problem zdobywania wiedzy i stworzenia jej wewnętrznej reprezentacji. Każdy taki problem posiada:
+1. Zadanie (zachowanie agenta które ma zostać ulepszone)
+2. Dane (doświadczenia, które są wykorzystywane do poprawy zadania)
+3. Miarę poprawności (każda nowa umiejętność nabywana przez agenta ma polepszać poprawność)
+
+Techniki uczenia się składają się z problemów: Zadanie (nauka przewidywania prawidłowej odpowiedzi), Feedback (agent dla różnych outcome'ow dostaje info czy jest to poprawne czy nie), Reprezentacja
+ (zbieranie i zapisywanie wszystkich doświadczeń agenta aby mógł je później wykorzystać), szkolenie online lub offline (w offline agent od razu zostaje wszystkie przykłady użycia, a
+ w online uzyskuje je w miarę postępu), Pomiar sukcesu (próba sklasyfikowania metod i działań), Stronniczość (tendecja do preferowania jednej hipotezy), Zakłócenia (pojawianie się w procesie
+ uczenia nieprawidłowych lub wybrakowanych danych), Interpolacja (przewidywanie wyników na podstawie częsciowych lub często powtarzających się danych)
+
+ --All models are wrong--
+
+ Popularny aforyzm pochodzący ze statystki "All models are wrong, but some are useful", co mówi nam, że tak naprawdę każdy model jest tylko przybliżeniem rzeczywistości, stworzenie
+ reprezentacji idealnie odzwierciedlającej dane zjawisko jest niemożliwe, więc jeśli tylko dane uzysakne na podstawie naszego modelu są dobrane adekwatnie do celu to jest on praktyczny.
+
+ --Regresja liniowa--
+
+ To problem dopasowania funkcji liniowej do zbioru treningowych przykładów, w których dane wejściowe i wyjściowe są numeryczne. Głównym zadaniem tutaj jest znalezienie wag (współczynników)
+ które minimalizują koszt.
+ Aby wyjśc poza modele liniowe można użyć np. zejście gradientu - iteracyjnej metody określania minimum funkcji, gdzie w każdym kroku zmniejsza ona wagę proporcjonalnie do swojej pochodnej
+ cząstkowej.
+ Rodzaje zejść gradientów:!
+ 1. Klasyczny gradientn zejścia - kiedy zapisujemy wszystkie zmiany i iterujemy po wszystkich elemetnach zbioru, efekt aplikujemy dopiero po przejściu przez wszystkie przykłady
+ 2. Przyrostowy gradient zejścia - kiedy zmiany stosujemy z każdą iteracją i dalej działamy już na zmienionych danych. Jeśli przykłady wybieramy losowo to mamy do czynienia z stochastycznym
+ gradientem zejścia.
+ 3. Grupowe zejście gradientu - aktualizuje wagi po partii przykładów.
+
+ --Rodzaje uczenia--
+
+ Główne powody dlaczego agent musi uczyc się sam:
+ 1. Projektanci nie sa w stanie przewidzieć wszystkich sytuacji
+ 2. Projektanci nie mogą przewidzieć zmian, które nastąpią w miarę upływu czasu
+ 3. Czasami programiście nie wiedza jak stworzyć rozwiązanie danego problemu.
+
+Każdy komponent agent można poprawić, ulepszenia zależą od tego: któryk komponent ma być poprawiony, jaką wiedzę posiada agent, jaka reprezentacja jest wykorzystana, jakie informacje zwrotne
+są dostępne do nauczenia się.
+
+Komponenty (każdy z nich może być nauczony):
+1. Bezpośrednie mapowanie z warunków do akcji
+2. Możliwośc wnioskowania
+3. Inforamcje o ewolucji świata i rezultatów akcji
+4. Użyteczne informacje wskazujące na celowośc stanów śwaita
+5. Informację o wartości działania
+6. Cele opisujące klasy stanów
+
+Trzy główne typy uczenia się są określane przez zwracane dane:
+1. Uczenie nienadzorowane - agent uczy się wzoru na wejściu nawet jeśli nie zostały zwrócone żadne dane.
+2. Uczenie wzmocnione - agent uczy się na podstawie wzmocnień (nagrody lub kary)
+3. Uczenie nadzorowane - agent obserwuje przykładowe pary danych wejściowych i wyjściowych i uczy się funkcji przekształcającej.
+
+--Intuicja--
+
+Ułatwia nam podejmowanie decyzji. Maszyny jednak jej nie posiadają przez co czasem znacznie gorzej radzą sobie z podejmowaniem decyzji niż ludzie.
+Sieci neuronowe wspomagają podejmowanie decyzji i osąd, stąd wziął się pomysł implementacji ich w uczeniu maszynowym. Argumentami wejściwomi są
+wagi, stała i kryteria natomiast na wyjściu otrzymujemy binarną odpowiedź na zadane przez nas kryteria. Ostatni neuron w sieci to funckja aktywacyjna które na podstawie obliczonej sumy podejmuje
+tą binarną decyzję.
+
+--Sieci neuronowe--
+
+Zbiór prostych jednostek obliczeniowych przetwarzających dane, komunikujących się ze sobą i pracujących równolegle.
+
+Perceptron - neuron który na wejściu pobiera pewną ilość danych i na ich podstawie zwraca pojedynczą wartość. Ich notacja często jest reprezentowana jako suma wag i inputów wraz z biasem
+(czyli taką bramką logiczną). Problem polega jednak na tym, że niewielka zmiana wagi lub biasu pojedynczego perceptronu w sieci może czasami spowodować całkowite wyjście tego perceptronu, a to
+może spowodować diametralne zmiany w całej sieci. Aby objeść ten problem, wprowadzono nowy typ zwany sigmoid neuron
+
+Sigmoid neuron- podobne do perceptronów, ale tutaj małe zmiany wag lub biasów nie powodują tak kolosalnych zmian. Pierwszą różnicą jest, że dane wejściowe nie muszą być binarne, mogą być dowolne
+z przedziału 0 do 1, i tak samo w przypadku wyjścia, wynik nie jest binarny ale obliczany z funkcji sigmoidalnej.
+
+Architektura:
+1. Pierwsza warstwa to input layer (wejściowa) - posiada neurony wejściowe
+2. Druga warstwa to hidden layer (ukryta) - często sieci mają więcej niż jedną ukrytą warstwę
+3. Trzecia warstwa to output layer (wyjścia) - zawiera neurony wyjściowe lub neuron pojedynczego wyjścia
+
+Zastosowanie sieci: Klasyfikacja danych, predykcja, rozpoznawanie i odtwarzanie obrazów, pamięć, neurobiologia, przeprowadzanie obliczeń na zasadzie działania mózgu.
+
+Back-propagation sieci - czyli korekcja wag w sieci wielowarstwowej przy wykorzystanie gradientowych metod optymalizacji.
+Do obliczania pochodnej można użyć reguły liniowej (pochodna funkcji liniowej) lub reguły łańcuchowej (pochoda z funkcji złożonej).
+Uczenie składa się z dwóch przejść przez sieć dla każdej iteracji:
+1. Predykcja - biorąc pod uwagę wartości na wejściach każdej warstwy, oblicz wartość dla wyników warstwy.
+2. Propagacja wsteczna - cofaj się i aktualizuj wagi sieci.
+
+Ogólny proces trenowania sieci:
+1. Modelujemy sieć (topologia sieci)
+2. Iniciujemy wagi losowo
+3. Dla danego wektora wejść obliczamy odpowiedź sieci
+4. Każdy neuron wyjściowy oblicza swój błąd
+5. Błędy propagowane są do wcześniejszych warstw
+6. Każdy neuron modifukuje wagi
+7. Wracamy do punktu 3, gdy wszystkie wektory wejśc zostaną użytę to losowo je mieszamy i zaczynamy znowu wykorzystywać
+8. Zatrzymujemy się gdy średni błąd danych treningowych przestanie maleć.
+
+Deep learning - korzystanie z wielu warstw w sieci neuronowej jako forma modelowania hierachicznego
+
+--Uczenie nadzorowane--
+
+Jest to jedna z opcji uczenia maszynowego, która zakłada obecność ludzkiego nadzoru nad tworzeniem funkcji odwzorowującej wejście systemu na jego wyjście. Algorytm otrzymuje:
+zbiór mozliwych inputów, zbiór możliwych outputów, zbiór przykładów (para input i output) oraz zbiór danych testowych z okreslonymi tylko inputami. Celem uczenia nadzorowanego jest znalezienie
+funkcji h, która aproksymuje funkcję f. Funkcja h to hipoteza, uczenie oznacza tutaj przeszukiwanie przestrzeni możliwych hipotez w celu znalezienia jednej, wystarczająco dobrej.
+Wiele hipotez może być poprawnych i w takim przypadku możliwym rozwiązaniem jest wybór najprostszej hipotezy. Należy pamiętać aby znaleźć kompromis pomiędzy zgodnością funkcji z punktami testowymi
+a jej złożnością tzn. pomimo, że funkcja może nie być idealna (np. nie być zgodna z żadnym punktem testowym) to i tak może okazać się wystarczająco dobrym przybliżeniem dla nieznanych wartości
+
+Ewaluacja błędów - to która predykcja jest preferowana, zalezy od reprezentacji prognozowania oraz od tego jak będzie ona oceniana. Można tu wykorzystać np. sumę błędnych prognoz,
+błąd bezwzględny, błąd sumy kwardratów, różnica bezwzględna, prawdopodbieństwo danych, logarytmiczne prawdopodobieństwo.
+
+Rodzaje błędów - nie wszystkie błędy są sobie równe, niektóre mogą mieć o wiele poważniejsze konsekwencje. Nasz program powiniene wybierać przewidywania w zależności od kosztu związanego z błędami
+
+Przewidywanie wyniku przy braku danych wejściowych - w takim przypadku zależnie od definiowania funkcji błędu outputem powinna być: wartośc która występuję najcześciej, średnia wartość, mediana,
+(maks wartośc + min wartosc)/2
+
+--Hierarchiczna klasteryzacja--
+
+Algorytm uczenia nienadzorowanego, którego celem jest budowa hierarchi klastrów. Dane które są "podobne" są łączone w pojedynczy klaster/grupę. Istnieją dwie metody klastrowania hierarchicznego:
+1. Metoda aglomeracyjna - założenie początkowe to, że kazdy punkt to osobny klaster. Następnie przechodzimy do procesu łączenia, każdy klaster łączymy z najbliższym klasterm, budujemy hierarchię
+klastrów poruszając się w górę aż otrzymamy pojedynczy klaster.
+2. Metoda deaglomeracyjna - przez podział, założenie początkowe to, że każdy punkt zawiera się w jednym klastrze, w kolejnych iteracjach rekursywnie dokonujemy podziału na coraz mniejsze klastry,
+który zawartośc jest podobna do siebie.
+
+Dendogram - kolejność łączeń między klastrami.
+
+Łączeniem punktów może być np. zastąpienie wartości punktów średnimi wartościami każdej z cech.
+
+--Klasteryzacja EM--
+
+Iteracyjna metoda znajdywania prawdopodobieństwa lub maksymalnych następstw, stosowana tam gdzie model zależy od nieobserwowanych zmiennych ukrytych (czyli gdzie nie można bezpośrednio
+rozwiązać równań)
+Zmienne ukryte - zmienne które nie są dostępne (obserwowane) na etapie wykonywania obliczeń np. bezpośrednia obserwacja choroby.
+
+Klastry nienadzorowane to problem polegający na rozpoznawaniu wielu nieetykietowanych kategorii w zbiorze obiektów.
+
+--Reguły asocjacyjne--
+
+jest to każda implikacja typu X=>Y, gdzie X i Y sa itemsetami. Jakość takiej reguły jest mierzona funkcjami:
+1. Wsparcie (support) s(X u Y)
+2. Wiarygodność (confidence) s(XuY)/s(X)
+
+Szukanie reguł to problem na znalezieniu wszystkich reguł asocjacyjnych o wsparciu większym niż sup_min i wiarygodnośc większej niż con_min, mając: zbiór pozycji, baza transakcji, stałe supmin i conmin
+Większośc algorytmów działa w dwóch krokach: Znajdź częste zbiory (zbiory o wsparciu większym niż sup_min). Podziel częste zbiory (dla każdego zbioru znajdź dwa pozdbiory które nadal mają con większe
+niż con_min).
+
+Algorytm apriori - służy do wyznaczania reguł asocjacyjnych. Jego dwa główne kroki to łączenie oraz obcinanie.
+
+--Klasteryzacja--
+
+Grupowanie dzielące przykłady na grupy i klasy. Rodzaje grupowania:
+1. Grupowanie silne - przykład należy do klasy, którą używa się potem do przewidywania wartości cech przykładu
+2. Grupowanie łagodne - każdy przykład posiada rozkład prawdopodobieństwa w swojej klasie, przewidywanie wartości jest średnią ważoną przewidywań klas, w której zawiera się przykład.
+
+K-means - używany do grupowania silnego. Przykłady treningowe i liczba klas k są podane jako dane wejściowe. Algorytm konstruuje klasy k, predykcę wartości dla każdej cechy, dla każdej klasy
+oraz przypisanie przykładów do klas. Działanie:
+1. Algorytm konstruuje funkcję która odwzorowuje każdy przykład na klasę.
+2. Dla każdej cechy, funkcję z klas do domeny.
+Celem jest znalezienie klasy funkcji które minimalizują błąd sumy kwadratów. K-means iteracyjnie poprawia błąd sumy kwadratów.
+Jednym z problemów k-means jest to, że jest on wrażliwy na względną skalę wymiarów.
+
+EM - może być używany do nauki probabilistycznego modelu z ukrytmi zmiennymi. W połączeniu z naiwnym klasyfikatorem Bayes'a tworzy grupowanie łagodne. Tutaj tak jak w k'means przykłady treningowe
+oraz liczba klas k są podane na wejściu. Tworzony jest naiwny model Bayes'a w którym znajduje się zmienna dla każdej cechy danych i ukryta zmienna klasy. Prawdopodobienśtwo potrzebne dla modelu
+to prawdopodobieństwo klasy oraz każej cechy podanej do klasy, celem algorytmu EM jest poznanie prawdopodobieństw które najbardzije pasują do danych. Kroki algorytmu:
+1. Krok E - aktualizacja kolumny zliczeń w oparciu o rozkład prawdopodobieństwa, dotyczy wnioskowania probabilistycznego
+2. Krok M - wnioskuje prawdopodobieństwo dla modelu a podstawie rozszerzonych danych
+
+--K means rózne wersje--
+
+Jenks natural breaks optimization - metoda optymalizacji Jenks jest metodą grupowania danych. Jej cel to określenie najlepszego rozmieszeczenia wartości
+w różnych klasach poprzez zmniejszenie wariancji w obrębie klas i maksymalizację wariancji między klasami. Działanie iteracyjne:
+1. OBlicz sumę odchyleń kwadratowych między klasami
+2. Oblicz sumę odchyleń kwadratowych od średniej tablicy
+3. Odejmij sumy od siebie.
+4. Po sprawdzeniu każdej sumy odchyleń kwadratowych między klasami, podejmij decyzję o przeniesieniu jednej jednostki z klasy największej sumie odchyleń kwadratowych w kierunku klasy o najniższej
+
+K-medioids - podobna do k-means ale róznicę stanowi dobór środków grup. W k-medioids jest to jeden z rozważanych punktów, a w k'means środek geometryczny. Medioidem nazywamy tu punkt
+którego średnia odległość od pozostałych z grupy jest najmniejsza. Jest ona bardziej odporna na szumy i wartości mocno odstające w porównaniu do k-means. Dązy ona do minializacji funkcji
+kosztu wobec medoidu.
+
+K-means++ - określa procedurę inicjalizacji centroidów, zanim zostaną kontynuowane standardowe iteracje optymalizacji k-means. Pierwszy centroid jest losowym punktem rozkładu jednostajnego
+wśród punktów, a następnie każdy centroid jest wybierany spośród pozostałych punktów, z prawdopodobieństwem proporcjonalnym do kwadratu odległości punktu od najbliżej leżącego centroidu.
+
+K-medians - tutaj jak w k-means jednak środek grup tzn. środek ciężkości jest wybierany na podstawie mediany a nie średniej. Wpływa to na minimalizację błędu w klastrze.
+
+--Naiwny klasyfikator bayesowski--
+
+Probabilistyczny model klasyfikujący. Klasyfikator zakłada, że wszystkie predyktory są od siebie niezależne.
+
+Twierdzenie Bayesa = P(A|B) = P(B|A)* P(A) / P(B), gdzie B i A to dowolne zdarzenia, a P(B|A) to prawdopodobieństwa zdarzenia B przy założeniu występienia zdarzenia A.
+
+Zastosowanie: filtracja spamu. rozpozawanie mowy
+
+--Niezależność--
+
+własnośc która określa, że równanie jest niezależne od danej jego zmiennej (zmienną można wydzielić i rozstrzygać osobno). P(A|B) = P(A)P(B)
+
+Zalety: zmniejszenie rozmiaru reprezentacji domeny, redukcja złożoności problemu wnioskowania
+Wady: Niezależność nie utrzyma się jeżeli istnieje chociażby pośrednie połączenie między zmiennymi, nawet niezależne pozdbiory mogą być duże (nic nie zyskujemy)
+
+--Prawdopodobieństwo--
+
+Rachunek subiektywnych pewności, stworzony do podejmowania decyzji.
+
+Zmienne - zmienne losowe posiadające domenę.
+
+Domena - zbiór wartości (może być ciągły czyli nieskończony lub dyskretny czyli policzalny)
+
+Zmienna atomowa - pewna wartość taka jak np. false
+
+Przestrzeń próbkowania - zbiór wszystkich możliwych światów, które są wzajemnie wykluczające i wyczerpujące
+
+Model prawdopodobieństwa - nadaje liczbowe prawdopodbieństwo każdemu ze światów
+
+Zdarzenie - zbiór światów spełniających warunek
+
+Prawdopodbieństwo bezwarunkowe - gdy nie mamy żadnej dodatkowej informacji P(A)
+
+Prawdopodobieństwo warunkowe - gdy mamy dodatkową informację P(A|B) = P(A ^ B) / P(B)
+
+Rozkład prawdopodobieństwa - wektor prawdopodobieństw kolejnych zdarzeń
+
+Funkcja gęstości prawdopodobieństwa - rozkład prawdopodobieństwa dla wielu zmiennych
+
+Światy - możliwy świat jest definiowany jako przypisanie wartości do wszystkich zmiennych losowych
+
+Pełny wspólny rozkład prawdopodobieństwa - wspólna dystrybucja dla wszystkich zmiennych losowych
+
+Aksjomaty prawdopodbieństwa:
+1. Prawdopodbieństwo jest zawsze większe bądź równe 0
+2. Prawdopodbieństwo jest miarą skończoną
+3. P(E1 u E2 u E3...) = Suma po i P(Ei)
+
+Wartość oczekiwna - funkcja przyjmująca świat jako argument i zwracająca liczbę rzeczywistą
+
+Entropia - średnia ilość informacji przypadająca na pojedynczą wiadomość ze źródła informacji
+
+--Sieci bayesowskie--
+
+Nazywanę siecią przekonań, acykliczny graf skierowany, gdzie wierzchołkami są zmienne losowe, a krawędzie oznaczją relację między nimi (tzn. jeśli krawędź z X do Y, to X jest parentem Y). Każdy węzeł
+ma określony rozkład prawdopodbieństwa warunkowego  P(X|Parents(X)) który określa wpływ rodziców.
+
+Sieci bayesowskie semantyka - możemy je rozumieć jako wspólny rozkład prawdopodbieństwa lub jako zbiór zdań warunkowo niezależnych (obie semantyki są równoważne)
+
+--Uczenie bayesowskie--
+
+Metoda polegająca na obliczaniu rozkładu prawdopodobieństwa zmiennych wyjściowych na podstawie zmiennych wejściowych oraz danych z przykładów treningowych.
+
+Zbiór danych jest independent and indentically distributed jeśli przykłady ze zbioru są parami niezależne.
+
+Rozkład prawdopodbieństwa dla modelu i jego parametrów mozna przybliżać funkcjami reprezentującymi różne dystrybucje.
+Dystrybucja beta - gdy zmienna przyjmuje wartości binarne
+Dytrybucja Dirilechta - gdy zmienna jest dyskretna o skończonej liczbie możliwych wartości.
+
+--Niepewność--
+
+Racjonalna decyzja zależy zarówno od względnej wagi różnych celów jak i prawdopodobieństwa w jakim zostaną one osiągniętę.
+Teoria decyzji = Teoria użyteczności + Teoria prawdopodobieństwa
+
+Próba wykorzystania logiki do radzenia sobie z dziedziną np. jak medycyna zawodzi ponieważ:
+1. Lenistwo - jest to zbyt trudne
+2. Teoretyczna ignorancja - nauka medyczna nie ma kompletnej teorii dla dziedziny
+3. Praktyczna ignorancja - nie wszystkie niezbędne badania zostały przeprowadzone, więc nigdy nie możemy być pewni co do konkretnego pacjenta.
+
+--Open World Assumption i Closed World Assumption--
+
+Closed World Assumption - założenie, że jeśli o czymś nie wiemy, że jest prawdziwe to jest nieprawdziwe. Stosuje się w systemach które posiadają komplente informacje.
+Open World Assumption - założenie, że jeżeli czegoś nie wiemy to jest to po prostu nieznane. Stosuje się w systemach z niekompletnymi informacjami.
+
+--Ontologia--
+
+Specyfikacja znaczeń symboli w systemie informacji. Zawiera: słownictwo kategorii rzeczy, organizację kategorii (np. dziedziczenie), Aksjomaty ograniczające definicje niektórych symboli
+
+--OWL--
+
+Język ontologiczny dla sieci www. Opisuje domeny w kategoriach:
+1. Osoby fizyczne
+2. Klasy
+3. Właściwości
+
+Ontologia dziedzinowa - ontologia stworzona dla konkretnej dziedziny wiedzy.
+
+--Linked Data--
+
+Cztery najważniejsze zasady:
+1. Używamy URI jako nazw dla rzeczy
+2. Ludzie mogą sprawdzać, rozumieć te nazwy (URI)
+3. Dostarczamy ustandaryzowaną informację (np. XML)
+4. Załączamy linki do powiązanych stron
+
+Semantic Web to:
+1. Połączone dane odczytywalne przez ludzi i maszyny
+2. Jeślli masz jakieś dane to możesz znaleźć inne powiązane z nimi
+3. Linki w semantycznym webie są reprezentacją obiektów
+
+--Notacja trójkowa--
+
+Metoda opisująca informację o zasobach.
+
+Struktura to podmiot orzeczenie dopełnienie np. <Bob> <is a> <person>
+
+--Sematnic Web Stack--
+
+Architekrua Semantic Web:
+1. Dolna wartswa - Hypertext Web, zawiera technologie dobrze znane dla hypertext web (np. xml)
+2. Środkowa warstwa - Standarized Semantic Web, zawiera technologię unormowane przez W3C (np. RDF, SPARQL)
+3. Górne warstwy - Unrealized Semantic Web, zawierają technologię które nie sa unormowane lub zawierają po prostu idee (np. User Interface)
+
+--TBOX vs ABOX--
+
+TBox i ABox to dwie składowe logiki opisowej dzielące ontologię na dwie części - terminologię oraz opis świata.
+
+TBox - opisuje terminologię i określa co oznaczaja symbole (coś jak klasa) - baza terminologiczna
+ABox - określa co jest prawdą w danym momencie (coś jak obiekt) - baza wiedzy ascercyjnej
+
+--Wyszukiwanie informacji--
+
+Zadanie znajdywania dokumentów istotnych dla potrzeb informacji wyszukującego
+
+Charakterystyka systemu IR:
+1. Korpus dokumentu (co traktujemy jako dokument)
+2. Sposób wystosowania zapytań
+3. Zbiór wynikowy
+4. Prezentacja zbioru wynikowego
+
+Model:
+boolean keyword model - stosowany na początku, każdy słowo jest booleanem i jeżeli występuje w dokumencie to trafiliśmy. Problem jest z określeniem który dokument jest ważniejszy.
+Modele bazujące na statystykach występującej liczby słów - większość systemów porzuciła boolean keyword model i korzysta z scoring functions które biorą dokument oraz zapytanie i zwraca numeryczny
+wynik (im większy tym istotniejszy dokument)
+
+BM25 scoring function - wynik to liniowa, ważona kombinacja dla każdego słowa z zapytania na podstawie:
+1. Częstośc występowania słowa w dokumencie
+2. Unikalnośc słowa w przekroju dużej liczby dokumentów
+3. Długośc dokumentu
+
+Oczywiście najpierw jest tworzona hit list czyli mapa dokumentów gdzie w ogóle wystąpiły dane słowa.
+
+Ocena systemu IR - dwa parametry:
+1. Precision - propocja istotnych dokumentów w wyniku
+2. Recall - propocja istotnych dokumentów z wyniku do wszystkich istotnych w całej dziedzinie.
+
+Usprawnienia: uwzględnianie korelacji między słowami, case folding, stemming, rozpoznawanie synonimów, metadane, pomijanie
+
+Pagerank algorithm - każda strona na początku ma daną ilość pkt np. 100 i teraz kiedy linkujemy inna stronę to tracimy trochę punktów a tam ta je dostaje.
+
+Hits algorithm - tworzy pewnego rodzaju graf skierowany, gdzie nodey to dokumenty a krawędzie odnośniki. Zwrot wskazuje elemnt cytowany. Authority to dokument często cytowany, Hubs to dokument cytujący
+
+Question answering - zamiast znaleźć dokument, próbuje znaleźć gotową odpowiedź. Np. AskMSR nie próbował zrozumieć odpowiedzi ale znał 15 możliwych typów pytań i wiedział jak je przetworzyć na
+odpowiedź.
+
+--Ensemble learning--
+
+Technika uczenia maszynowego polegająca na wyborzu zespołu hipotez z przestrzeni hipotez i połączeniu ich prognoz w celu stworzenia jednego modelu.
+
+Sposoby:
+1. Głosowanie - każdy model dokonuje prognozy i ta która otrzyma największą ilość głosów staje się ostateczną
+2. Uśrednianie - obliczana jest średnia prognoza.
+3. Boosting
+4. Bagging
+5. Stacking
+
+Zastosowanie - Ensemble learning stosujemy, aby zmniejszyć ryzyko błednej hipotezy
+
+--Transductive learning--
+
+Sposób wnioskowania/rozumowania/dochodzenia do rozwiązania na podstawie pewnego zbioru treningowego dla zbioru testowego.
+Różnica między indukcyjnym uczeniem a transdukcyjnym jest taka, że w tym pierwszym jest klasyczne uczenie nadzorowane tzn. tworzymy model, uczymy na znanych danych i etykietach i potem
+etykietujemy dane ze zbioru testowego, a w przypadku transdukcyjnego korzystamy nie tylko z danych treningowych (które mają etykietę) ale i testowych - tutaj w procesie uczenia zostaną przydzielone
+etykiety.
+
+--Transfer learning--
+
+Przechowywanie wiedzy zdobytej podczas rozwiązywania jakiegoś problemu i używanie jej w celu rozwiązanie innego.
+Używane w:
+Self-driving cars, robotyka, rozpoznawanie obiektów, transfer języka.
+
+Metody stosowania:
+1. CNN - zawiera część konwolucyjną i fully connected - gdzie w pierwszej częsci są wykrywane np. krawędzie, a fully connected służy do wydzielenia tych cech które są uznane za istotne
+2. Niezmienne reprezentacje - bez względu na domenę ta sama reprezentacja
+3. Upodabnianie reprezentacji
+
+Powiązane - semi-supervised learning, multi-task learnig, continous learning, zero-shot learning.
+
+--Deep learning--
+
+Polega na tworzeniu głębokich sieci neuronowych, które mają za zadanie udoskonalić np. technikę rozpoznawania głosu.
+
+Uczenie maszynowe a głębokie - w uczeniu maszynowe zazwyczaj potrzeba udziału ludzkiego operatora, natomiast głebokie jest w większości przeporawdzane bez nadzoru.
+
+Zastosowanie: Google Brain, Google Now, Siri
+
+--Reinforcment Learning--
+
+Uczenie przez wzmacnianie polega na tym, że agent działa w określonym środowisku, obserwuje jego stan i otrzymuje nagrody.
+
+--Podejście do SI--
+
+Thinking Humanly - w celu tworzenia programów naśladujących proces myślenia ludzi, musimy najpeirw posiadać wiedzeo tym w jaki sposób ludzie myslą. W SI wymienia się trzy takie sposoby:
+1. Introspekcja
+2. Eksperymenty psychologiczne
+3. Obrazowanie pracy mózgu
+
+Thinking Rationally - jednym z podejść do SI jest tradycja logiczna. Główne przeszkody:
+1. Problem przedstawienia wiedzy nieformalnej w logicznej notacji
+2. Ogromna ilość zasobów wymagana do przetworzenia problemów które mają nawet kilkaset faktów.
+
+Acting Humanly - Test Turinga został opracowany w celu dostarczenia satysfakcjonującej definicji inteligencji, komputer go zdaje jeśli użytkownik po zadaniu kilku pytań nie jest w stanie stwierdzić
+czy rozmawia z maszyną czy z człowiekiem. Komputer powinien posiadać te umiejętności:
+1. Przetwarzanie języka naturalnego
+2. Reprezentacja wiedzy
+3. Automatyczne rozumowanie
+4. Uczenie maszynowe
+Dodatkowo:
+1. Widzenie komputerowe
+2. Robotyka
+
+Acting Rationally - agent jako program charakteryzuje się następującymi cechami:
+1. Autonomiczność
+2. Komunikatywność
+3. Percepcja
+Jego rozszerzenei czyli rational agent dodatkowo posiada wymóg podejmowania akcji najlepiej rokujących.
+Acting rationally ma dwie cechy które stawiają je ponad pozostałymi:
+1. Jest bardziej ogólne niż podejście thinking rationally
+2. Jest bardziej dostosowany do rozwoju naukowego
+
+--Agent i środowisko--
+
+SI dotyczy praktycznego rozumowania, które prowadzi do osiągniecia celu. Połączenie percepcji, rozumowania i działania definuje postać agenta, działającego w pewnym środowisku gdzie może być
+więcej agentów. Razem tworzą świat.
+
+Każde działanie agenta jest determinowane przez:
+1. Wcześniejszą wiedzę
+2. Historię interakcji ze środowiskiem
+3. Celi
+4. Umiejętności
+Każdy agent posiada wewnętrzny stan który określa jego przekonania.
+Agentów można dzielić na agentów z ustalonym celem oraz bez ustalonego celu (Ci tworzą zbiór zwany naturą)
+
+--Chiński pokój--
+
+Eksperyment myślowy jako głos przeciwny w dyskusji czy przejście testu Turinga świadczy o inteligencji maszyny.
+W pokoju siedzi człowiek, chińczycy wsuwają mu kartkę z chińskim i każą przetłumaczyć, on ma książkę gdzie jest napisane co ma napisać jak wystąpi dany znaczek i tak tłumaczy.
+Wniosek - Człowiek w środku nie zna chińskiego umie po prostu posługiwać się regułami.
+
+--Explanatory gap--
+
+Trudnośc w wyjaśnianiu w jaki sposób właściwości fizyczne są odczuwane gdy są doświadczane.
+
+--Sztuczna inteligencja--
+
+Dziedzina badająca syntezę oraz analizę agentów obliczeniowych, którzy zachowują się w sposób inteligentny.
+
+Agent to coś co istnieje w świecie rzeczywistym i swoim działaniem ma wpływ na środowisko. Agent zachowuje się inteligentnie jeśli:
+1. To co robi jest odpowiednie do otoczenia
+2. Odpowiednio się dostosowuje do zmieniających się czynników
+3. Uczy się z doświadczenia
+4. Podejmuje odpowiednie decyzje
+
+Agent obliczeniowy to taki którego decyzje można są do wyjaśnienia w kategoriach obliczeniowych.
+
+--Silna vs słaba SI--
+
+Pojęcie odnoszące się do porównania możliwości SI w odniesieniu do człowieka.
+
+Silna - system potrafi myśleć oraz mający rozum
+Słaba - system zachowujący się jakby potrafił myśleć i posiadał umysł
