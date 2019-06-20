@@ -1,0 +1,115 @@
+1. Czym jest serwlet?
+Jest to klasa odpowiedzialna za przetwarzanie żądań HTTP oraz generowanie zawartości która będzie zwracana w odpowiedzi
+2. Wymień metody, które pozwalają na obsługę żądań HTTP
+doPost, doGet, doPut, doDelete itd.
+3. Ile domyślnie instancji serwletu zostanie utworzonych w kontenerze?
+Jedna
+4. Jaka metoda odpowiada za inicjalizację oraz zniszczenie serwletu?
+Odpowiednio init oraz destroy
+5. Wymień sposoby konfiguracji serwletów
+Poprzez Deployment Descriptor (web.xml) lub adnotacje
+6. Czym są filtry w aplikacjach webowych?
+Są to klasy wywoływane przed uruchomieniem właściwego serwletu
+7. Jaką adnotacją oznaczamy serwlety?
+@WebServlet
+8. Jaką adnotacją oznaczamy filtry?
+@WebFilter
+9. Opisz cykl życia filtrów
+init() -> doFilter() -> destroy()
+10. Wymień 4 zastosowania filtrów
+- uwierzytelnianie - sprawdzamy czy użykownik jest zalogowany
+- logowanie (od loggera, nie od loginu!) - pozwala na logowanie informacji już na poziomie filtrów
+- kompresja - kompresujemy odpowiedź, aby przeglądarka otrzymała ją szybciej
+- cache - czasami przez uruchomieniem serwletu można stwierdzić, że odpowiedź się nie zmieniła.
+11. Wymień 7 elementów JSF
+- Komponenty interfejsu użytkownika
+- Zarządzanie ziarnami
+- Walidacja danych
+- Konwersja danych
+- Dynamiczny nasłuch komponentów - podpinanie wyświetlonych danych do beanów w Javie
+- Nawigacja
+- Facelets - szablony dla JSF
+12. Wymień podział EJB
+- sesyjne
+- sterowane komunikatami - pozwalają na asynchroniczną komunikację
+- encje
+13. Wymień i opisz rodzaje sesyjnych EJB
+- bezstanowe - nie utrzymują informacji o stanie (np. dla każdego usera robimy to samo)
+- stanowe - utrzymują stan pomiędzy wywołaniami (np. Koszyk w sklepie)
+- singleton
+14. Czym jest EJB?
+API JavyEE służące do tworzenia komponentów biznesowych
+15. Czym jest CDI?
+Context and Dependency Injection - standard wstrzykiwania zależności w JavieEE
+16. Jaka adnotacja pozwala na wstrzyknięcie zależności?
+@Inject
+17. Czym jest Dependency Injection?
+Wzorzec pozwalający na przekazywanie gotowych instancji obiektów do obiektów które z nich korzystają.
+18. Opisz relację pomiędzy CDI a EJB
+EJB korzysta z tych samych właściwości co CDI, można powiedzieć, że EJB >= CDI
+19. Czym są interceptory?
+Są to komponenty pozwalające na dodawanie logiki przed i po wywołaniu metody innego komponentu
+20. Jaką adnotacją oznaczamy klasę będącą interceptorem?
+@Interceptor
+21. Wymień 3 typy interceptorów
+- metod biznesowych
+- metod cyklu życia
+- zdarzeń czasowych EJB
+22. Jaką adnotacja oznaczamy interceptory biznesowe?
+np. @AroundInvoke
+22. Jaką adnotacja oznaczamy interceptory cyklu życia?
+np. @PostConstruct
+22. Jaką adnotacja oznaczamy interceptory zdarzeń czasowych EJB?
+np. @AroundTimeout
+23. Czym są dekoratory?
+Są to klasy pozwalające na dodanie nowej logiki do istniejącej klasy
+24. Jaką adnotacją oznaczamy dekorator i klasę dekorowaną?
+Odpowiednio @Decorator i @Decorates
+25. Co zostanie wywołane najpierw: dekorator czy interceptor?
+Interceptor (Interceptor może np. rozpoczynać transakcję, a dekorator dodawać logikę logowania)
+26. Czym są zdarzenia?
+Funkcjonalność pozwalająca na redukcję zależności pomiędzy komponentami, działa jak ulepszony wzorzec obserwator. Zdarzenia są pewnego rodzaju szyną danych, która po otrzymaniu informacji o danym zdarzeniu, przekazuje ją do komponentów, które zadeklarowały chęć otrzymywania informacji o danym zdarzeniu.
+27. Czym jest Inversion of Control?
+Przeniesienie funkcji sterowania (tworzenie obiektów itp) do używanego frameworku, aby zarządzał tym za nas.
+28. W jaki sposób powiązane są ze sobą Dependency Injection i Inversion of Control?
+DI jest jednym z przykładów realizacji IoC
+29. Czym jest JPA?
+Jest specyfikacją dotyczącą mapowania obiektowo - relacyjnego (ORM)
+30. Za co odpowiada EntityManager w JPA?
+Zarządza transakcjami i cyklem życia encji
+31. Czym jest trwałość w ORM?
+Powiązanie konkretnego obiektu z wierszem w bazie danych
+32. Wymień podstawowe usługi JPA
+EntityManager, ORM, JPQL, JPA Criteria API
+33. Czym jest ORM?
+Object Relational Mapping - mapowanie obiektu na wiersz w bazie danych
+34. Czym jest JPQL?
+Java Persistence Query Language - pozwala na odpytywanie bazy danych za pomocą składni, która nie zależy od dostawcy bazy danych ()
+35. Jaka funkcja pozwala na utworzenie zapytania JPQL?
+EntityManager.createQuery()
+36. Czym jest JPA Criteria API?
+Specyfikacja pozwalająca na tworzenie zapytań w notacji stricte obiektowej
+37. Czym jest JMS?
+Java Messaging Service - jest to standardowy zestaw interfejsów i modeli do tworzenia, czytania i przesyłania komunikatów. Określamy zasób na który wyślemy wiadomość, a nie konkretnego odbiorce
+38. Wymień i opisz cechy JMS
+- niezawodność - komunikat zostanie dostarczony raz i tylko raz
+- loose coupling - wymiana komunikatów uniezależnia kody programów od siebie
+- asynchroniczność - dostawca wiadomości może dostarczyć wiadomość klientowi gdy ten się pojawi, a klient nie musi wysyłać prośby o wiadomość
+39. Wymień typy komunikatów JMS
+- point to point
+- publish subscribe
+40. Opisz typ komunikatu point to point w JMS
+Komunikat trafia do konkretnej kolejki, która przetrzymuje wiadomość, aż odbiorca ją odbierze lub wiadomość wygaśnie.
+41. Opisz typ komunikatu publish subscribe w JMS
+nadawca wysyła wiadomość do tematu (topic), a wszyscy subskrybenci tego tematu mogą odczytać wiadomość, nadawca i odbiorcy nie muszą o sobie nic wiedzieć (wiadomość trafia tylko do aktywnych klientów)
+42. Wymień sposoby budowania web serwisów SOAP
+- top-down - tworzymy WSDL i generujemy klasy Javy
+- bottom-up - piszemy klasy Javy i generujemy WSDL
+43. Czym jest WSDL?
+Dokument XML definiujący usługę sieciową
+44. Czym jest JAX-WS?
+Java API for XML Web Services - API pozwalające na tworzenie i konsumpcję web serwisów (głownie SOAP)
+45. Czym jest JAX-RS?
+Java API for RESTful Web Services - API pozwalające na tworzenie i konsumpcję web serwisów korzystających z architektury REST
+46. Wymień typy wiadomości JMS
+TextMessage(String), MapMessage[Map(String, Cokolwiek)], BytesStream(binarna), StreamMessage(strumień wartości prymitywnych typów), ObjectMessage(serializowany obiekt), Message (tylko nagłowek i właściwości, bez ciała)
