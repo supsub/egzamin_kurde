@@ -113,15 +113,131 @@ Java API for XML Web Services - API pozwalające na tworzenie i konsumpcję web 
 Java API for RESTful Web Services - API pozwalające na tworzenie i konsumpcję web serwisów korzystających z architektury REST
 46. Wymień typy wiadomości JMS
 TextMessage(String), MapMessage[Map(String, Cokolwiek)], BytesStream(binarna), StreamMessage(strumień wartości prymitywnych typów), ObjectMessage(serializowany obiekt), Message (tylko nagłowek i właściwości, bez ciała)
-47. Jaka jest roznica pomiedzy standalone a domain w wildfly?
+47. Czym jest WildFly?
+Opensourcowy serwer aplikacyjny
+48. Wymień i opisz tryby działania WildFly
+- samodzielny(standalone) - każda instancja serwera stanowi niezależny proces
+- domenowy(domain) - można uruchomić wiele serwerów aplikacji i zarządzać nimi z jednej lokalizacji, może działać na kilku fizycznych maszynach
+49. W jaki sposób można zarządzać serwerem aplikacji WildFly?
+- interfejs webowy - localhost:9990
+- wiersz poleceń - CLI
+- pliki konfiguracyjne - XML
+50. W jaki sposób można utworzyć użytkownika w WildFly?
+Skryptem add-user.sh
+51. Wymień zakładki WebConsole WildFly'a
+- Configuration
+- Deployments
+- Runtime
+- Access Control
+52. Wymień zalety WildFly
+- szybkie włączanie
+- oparty na niezależnych projektach
+- łatwy do testowania
+- równoczesne ładowanie klas
+53. Wymień cechy paradygmatu SOA
+- Zestandaryzowana funkcja interfejsu
+- Luźne powiązania
+- Niezależność od platformy
+- Composable
+- Discoverable
+- Autonomiczność, rozszerzalność, interoperacyjność
+- Reużywalne usługi
+54. Co oznacza Composable jako cecha paradygmatu SOA?
+Serwisy muszą mieć możliwość łączenia się, celem tworzenia bardziej złożonych usług
+55. Co oznacza Discoverable jako cecha paradygmatu SOA?
+Każda usługa posiada metadane, które opisują co ona robi
+56. Wymień zasady paradygmatu SOA
+- biznes steruje usługami, a usługi technologią
+- musi istnieć "business agility" czyli szybka adaptacja na zmiany
+- procesy biznesowe tłumaczymy na logikę biznesową, tworzymy usługi związane z logiką i oddzielamy logikę biznesową od implementacji
+57. Podaj SOA Manifesto
+- Business value over technical strategy
+- Strategic goals over project-specific benefits
+- Intrinsic interoperability over custom integration
+- Shared services over specific-purpose implementations
+- Flexibility over optimization
+- Evolutionary refinement over pursuit of initial perfection
+58. Czym jest BPM?
+Business Process Management - zarządzanie operacjami skupione na optymalizacji procesów biznesowych
+59. Podaj podział metod integracji aplikacji biznesowych 
+- zorientowana na dane
+- zorientowana na procesy
+60. Podaj metody integracji aplikacji biznesowych zorientowanych na dane
+- baza danych - wspólna, konsystentna baza danych
+- komunikaty - wysyłanie eventów przez kolejki
+- RPC - zdalne wywołania metod
+61. Podaj metody integracji aplikacji biznesowych zorientowanych na procesy
+- orkiestracja usług - modelowanie interakcji pomiędzy usługami wewnątrz pojedynczego procesu biznesowego
+- process manager
+- choreografia usług
+62. Czym jest SOAP?
+Simple Object Access Protocol - protokół komunikacyjny korzystający z XML oraz najczęściej protokołu HTTP. Dotyczy przede wszystkim usług sieciowych.
+63. Czym jest UDDI?
+Universal Description, Discovery and Integration - specyfikacja opisująca w jaki sposób zarejestrować swój Web Service tak, aby inni użytkownicy mogli go odnaleźć
+64. Czym jest REST?
+REpresentational State Transfer - styl architektury oprogramowania korzystający z protokołu HTTP, jest bezstanowy, zapytanie może korzystać z JSONa, XMLa, plain textu itp
+65. Wymień kody odpowiedzi protokołu HTTP
+1xx - kody informacyjne np. 100 - kontynuuj (prośba o dalsze wysłanie zapytania)
+2xx - kody potwierdzenia np. 200 - OK - wszystko kozak
+3xx - kody przekierowania np. 300 - wiele możliwości - dane zapytanie można obsłużyć na kilka sposobów
+4xx - kody błędów po stronie klienta np. 404 - nie znaleziono
+5xx - kody błędów po stronie serwera np. 500 - wewnętrzny błąd serwera
+66. Jakie adnotacje zastosujesz w JAX-RS do zdefinowania zasobu oraz reprezentacji która przyjmiesz (np. chcesz wysłać JSONa i dostać JSONa)?
+Odpowiednio @Consumes i @Produces
+67. Czym jest idempotentność?
+Własność operacji pozwalająca na wielokrotne ich stosowanie bez zmiany wyniku
+68. Co oznacza, że motoda jest bezpieczna?
+Oznacza to, że nie modyfikuje zasobu
+69. Czym jest i ile poziomów ma model dojrzałości Richardsona?
+Model opisujący założenie usługi REST posiada 4 poziomy (0 - 3)
+70. Opisz zerowy poziom dojrzałości Richardsona
+The Swamp of POX - API nie wykorzystuje potencjału protokołu HTTP i nie spełnia założeń architektury REST
+71. Opisz pierwszy poziom dojrzałości Richardsona
+Resources - potrzebujemy wiele identyfikatorów URI, korzystamy zazwyczaj tylko z metod GET i POST
+72. Opisz drugi poziom dojrzałości Richardsona
+HTTP Verbs - korzystamy ze wszystkich metod HTTP, ale mamy wiele adresów URL na które wysyłamy zapytania w zależności od metody HTTP
+73. Opisz trzeci poziom dojrzałości Richardsona
+Hypermedia Controls - wymagana jest implementacja HATEOAS
+74. Czym jest HATEOAS?
+Hypermedia As The Engine Of Application State - komponent architektury REST, który dostracza informacji o pozostałych komponentach aplikacji poprzez hiperłącza
+75. Czym jest GraphQL?
+Jest to język zapytań, który udostępnia wspólny intefejs pomiędzy klientem a serwerem do pobierania i manipulowania danymi
+76. Wymień podobieństwa SOA i mikroserwisów
+- nie są monolitami - składają się z luźno powiązanych usług
+- osobne teamy mogą tworzyć usługi
+- każdy team może sobie wybrać stack technologiczny niezależnie
+77. Wymień różnice pomiędzy SOA a mikroserwisami
+- SOA posiada jedną bazę danych, a mikroserwisy trzymają niezależnie swoje dane
+- SOA posiada dodatkową warstwę - ESB
+78. Czym jest warstwa ESB w SOA?
+Warstwa która możliwia dynamiczne przyłączanie i odłączanie usług wchodzących w skład systemu
+79. Wymień i opisz style architektoniczne stosowane w podejściu usługowym
+- EDA - Event Driven Architecture - tworzenie, wykrywanie, obsługiwanie i reagowanie na zdarzenia. Agenci emitują zdarzenia, a konsumenci odbierają.
+- Wielowarstwowa -  dwuwarstwowa składa się z warstwy serwerowej i klienckiej, trójwarstwowa z warstwy prezentacji, logiki biznesowej i modelu danych (np MVC), wielowarstwowa może mieć do tego np. warstwę autentykacji i autoryzacji
+80. Czym jest DDD?
+Domain Driven Development - podejście do tworzenia oprogramowania kładące nacisk na takie definiowanie obiektów i komponentów systemu oraz ich zachowań, aby wiernie odzwierciedlały rzeczywistość. Dzięki temu można modelować systemy przez ekspertów mających wiedzę dziedzionową, ale niekoniecznie wiedzę o systemach informatycznych
+81. Wymień elementy składowe DDD
+- asocjacje -związki między bytami wchodzącymi w skład modelu dziedziny
+- encje - obiekty posiadające tożsamość (dzięki temu możemy je wyszukiwać i porównywać z innymi)
+- obiekty wartości - obiekty posiadające wartości, ale nie tożsamości 
+- usługi - a chuj pierdolca z tym dostanę zaraz
+- moduły
+82. Wymień techniki realizacji asynchronizmu w aplikacjach biznesowych
+- komunikacja przy użyciu kolejek komunikatów
+- adnotacja @Asynchronous przy EJB
+- asynchroniczne przetwarzanie przez serwlety
+- web serwisy
+- rest z adnotacją @Asynchronous
+- web sockety
+83. Jaka jest roznica pomiedzy standalone a domain w wildfly?
 standalone mode to jeden proces jvm, jedno środowisko, kazdy server ma swoją konfiguracje
 domain mode moze miec wiele serverow i cala konfiguracja jest rozdzielana z jednego miejsca
-48. Mozliwe typy plikow do zdeployowania na Wildfly(cztery)
+84. Mozliwe typy plikow do zdeployowania na Wildfly(cztery)
 WAR – Web application archive
 SAR – Service archive
 JAR – Java Archive
 EAR – Enterprise application archive
-49.Jak można zdeployowac aplikacje(trzy sposoby)
+85.Jak można zdeployowac aplikacje(trzy sposoby)
 admin console(localhost:najn-najn-najn-zero)
 autodeploy(z ide np)
 automation( z uzyciem automation tool)
