@@ -113,3 +113,15 @@ Java API for XML Web Services - API pozwalające na tworzenie i konsumpcję web 
 Java API for RESTful Web Services - API pozwalające na tworzenie i konsumpcję web serwisów korzystających z architektury REST
 46. Wymień typy wiadomości JMS
 TextMessage(String), MapMessage[Map(String, Cokolwiek)], BytesStream(binarna), StreamMessage(strumień wartości prymitywnych typów), ObjectMessage(serializowany obiekt), Message (tylko nagłowek i właściwości, bez ciała)
+47. Jaka jest roznica pomiedzy standalone a domain w wildfly?
+standalone mode to jeden proces jvm, jedno środowisko, kazdy server ma swoją konfiguracje
+domain mode moze miec wiele serverow i cala konfiguracja jest rozdzielana z jednego miejsca
+48. Mozliwe typy plikow do zdeployowania na Wildfly(cztery)
+WAR – Web application archive
+SAR – Service archive
+JAR – Java Archive
+EAR – Enterprise application archive
+49.Jak można zdeployowac aplikacje(trzy sposoby)
+admin console(localhost:najn-najn-najn-zero)
+autodeploy(z ide np)
+automation( z uzyciem automation tool)
