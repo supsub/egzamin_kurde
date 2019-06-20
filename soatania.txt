@@ -93,9 +93,9 @@ Jest to model opisujący założenia usług RESTful
 Poziom​​0​​(The​​Swamp​​of​​POX)​:​​mówi​​o​​tym,​​że​​REST​​w​​zasadzie​​korzysta​​zgotowych​​rozwiązań​​czyli​​protokołu​​http,​​tylko​​jeden​​endpoint​​m​​jedna​​metoda​​HTTP(​​zwyklePOST)
 47.Opisz poziom 1 modelu dojrzałości Richardsona
 Poziom​​1​​(Resources)​:​​wprowadza​​definicje​​zasobu​​oraz​​jego​​hierarchi
-48.Opisz poziom 1 modelu dojrzałości Richardsona
+48.Opisz poziom 2 modelu dojrzałości Richardsona
 Poziom​​2​​(HTTP​​Verbs)​:​​w​​poprzednich​​poziomach​​zapytania​​mogły​​korzystać wyłącznie​​z​​POST,​​poziom​​ten​​wprowadza​​inne​​czasowniki​​HTTP​​np.​​GET,​​PUT​​orazwykorzystuje​​w​​pełną​​pulę​​kodów​​odpowiedzi​​HTTP(w​​poprzednich​​warstwach​​dostępna​​jesttylko​​200)
-49.Opisz poziom 1 modelu dojrzałości Richardsona
+49.Opisz poziom 3 modelu dojrzałości Richardsona
 Poziom​​3​​(Hypermedia​​Controls)​:​​wprowadza​​HATEOAS,​​czyli​​mechanizm umożliwiający​​nawigację​​przez​​zasoby​​bez​​wiedzy​​o​​konkretnych​​adresach​​url.​​Klient​​znająca adres​​korzenia​​wykonując​​zapytanie​​dostaje​​listę​​zasobów,​​które​​zawierają​​w​​sobie​​adres​​dosiebie​​pozwalający​​wykonać​​zapytanie​​na​​konkretnym​​zasobie
 50. Co to jest Serwlet?
 Serwlet​​-​​​kawałek​​kodu​​w​​Javie​​po​​stronie​​serwera​​HTTP,​​który​​rozszerza​​jegomożliwości.​​Działa​​w​​odpowiedzi​​na​​żądanie​​klienta,​​pełni​​rolę​​kontrolera​​w​​MVC,Służy​​do​​wyświetlania​​dynamicznych​​stron​​WWW,​​przetwarzania​​formularza,forwardingu,​​wyświetlania​​wyników​​zapytań​​do​​bazy​​danych.
